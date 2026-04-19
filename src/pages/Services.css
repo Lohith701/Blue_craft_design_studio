@@ -1,0 +1,60 @@
+.service-card {
+  transition: var(--transition);
+  border-top: 3px solid transparent;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  border-top-color: var(--accent);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.service-card:hover .service-icon-wrapper {
+  background-color: var(--accent);
+}
+
+.service-card:hover .service-icon-wrapper svg {
+  color: var(--white);
+}
+
+.cta-section {
+  position: relative;
+}
+
+.cta-section .btn:hover {
+  background-color: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+  z-index: 0;
+}
+
+.circle-1 {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  left: -100px;
+}
+
+.circle-2 {
+  width: 400px;
+  height: 400px;
+  bottom: -150px;
+  right: -100px;
+}

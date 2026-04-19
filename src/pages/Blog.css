@@ -1,0 +1,28 @@
+.blog-card {
+  transition: var(--transition);
+}
+
+.blog-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px);
+}
+
+.blog-img-wrapper {
+  height: 240px;
+}
+
+.border-gray-100 {
+  border-color: #f3f4f6;
+}
+
+.read-more {
+  display: inline-flex;
+}
+
+.read-more:hover svg {
+  transform: translateX(4px);
+}
+
+.read-more svg {
+  transition: transform 0.3s ease;
+}
