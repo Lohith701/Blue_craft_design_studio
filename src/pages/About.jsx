@@ -57,19 +57,19 @@ const About = () => {
       <section className="section bg-secondary">
         <div className="container text-center">
           <h2 className="h2 mb-12">Our Core Values</h2>
-          <div className="grid grid-cols-4 gap-6">
+          <div className="core-values-grid">
             {[
               { icon: Target, title: 'Precision', desc: 'Meticulous attention to detail in every aspect of design and execution.' },
               { icon: Lightbulb, title: 'Innovation', desc: 'Constantly exploring new materials, trends, and sustainable practices.' },
               { icon: Users, title: 'Collaboration', desc: 'Working closely with clients to ensure their personality shines through.' },
               { icon: Shield, title: 'Integrity', desc: 'Transparent pricing and honest communication from start to finish.' },
             ].map((val, idx) => (
-              <div key={idx} className="value-card bg-white p-6 rounded-lg shadow-sm">
-                <div className="icon-wrapper bg-secondary text-accent mb-4 mx-auto">
+              <div key={idx} className="value-card">
+                <div className="value-icon-wrap">
                   <val.icon size={28} />
                 </div>
-                <h3 className="h4 mb-2">{val.title}</h3>
-                <p className="text-muted text-sm">{val.desc}</p>
+                <h3 className="value-title">{val.title}</h3>
+                <p className="value-desc">{val.desc}</p>
               </div>
             ))}
           </div>

@@ -50,71 +50,687 @@
   gap: 1.5rem;
 }
 
-/* About Snippet */
+/* ── About Snippet ──────────────────────────────── */
 .about-snippet .grid {
   align-items: center;
 }
 
-.about-image-wrapper {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
+/* Eyebrow label — styled badge */
+.about-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background-color: rgba(124, 135, 127, 0.1); /* light sage tint */
+  border: 1px solid rgba(124, 135, 127, 0.25);
+  border-radius: 999px;
+  padding: 0.35rem 1rem 0.35rem 0.7rem;
+  margin-bottom: 1.1rem;
 }
 
+/* Decorative dash before the label text */
+.about-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--accent);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Heading spacing */
+.about-heading {
+  margin-bottom: 1.25rem;
+  line-height: 1.15;
+}
+
+/* Paragraph */
+.about-desc {
+  line-height: 1.8;
+  margin-bottom: 1.75rem;
+}
+
+/* Row: checklist on left, button on right */
+.about-cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* Checklist */
+.about-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.about-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+/* Pill button variant */
+.btn-pill {
+  border-radius: 999px;
+  padding: 0.85rem 1.8rem;
+  gap: 0.5rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Right column: absolute-positioned collage */
+.about-visuals {
+  position: relative;
+  height: 520px;
+}
+
+/* Large image — top-left, 72% wide, leaving 28% right gap for stat panel */
+.about-img-primary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 72%;
+  height: 58%;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.about-img-primary img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Smaller image — bottom-right, leaves left side for 15+ badge */
+.about-img-secondary {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 64%;
+  height: 54%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.about-img-secondary img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Shine sweep (plays once on .shine-active) ── */
+@keyframes imageSweep {
+  0%   { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(250%)  skewX(-20deg); }
+}
+
+.about-img-primary::after,
+.about-img-secondary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255,255,255,0.45) 50%,
+    transparent 65%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.about-img-primary.shine-active::after {
+  animation: imageSweep 1.1s ease-out 0.3s forwards;
+}
+
+.about-img-secondary.shine-active::after {
+  animation: imageSweep 1.1s ease-out 0.7s forwards;
+}
+
+/* ── 15+ circle badge — sits at the junction of the two images ── */
 .experience-badge {
   position: absolute;
-  bottom: -20px;
-  right: 20px;
-  background-color: var(--primary);
+  left: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background-color: var(--accent);
   color: var(--white);
-  padding: 1.5rem;
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-lg);
+  z-index: 10;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+  transform-origin: center;
 }
 
 .experience-badge .years {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   line-height: 1;
-  color: var(--accent);
+  color: var(--white);
+  letter-spacing: -1px;
 }
 
-.experience-badge .text {
-  font-size: 0.875rem;
+.badge-label {
+  font-size: 0.62rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.88);
+  text-align: center;
+  margin-top: 4px;
+  line-height: 1.4;
 }
 
-/* Key Advantages */
-.advantage-card {
-  transition: var(--transition);
-  border-bottom: 3px solid transparent;
+/* Bounce pulse when counter finishes */
+@keyframes badgeBounce {
+  0%   { transform: translateY(-50%) scale(1); }
+  30%  { transform: translateY(-50%) scale(1.18); }
+  55%  { transform: translateY(-50%) scale(0.93); }
+  75%  { transform: translateY(-50%) scale(1.07); }
+  100% { transform: translateY(-50%) scale(1); }
 }
 
-.advantage-card:hover {
-  transform: translateY(-5px);
-  border-bottom-color: var(--accent);
-  box-shadow: var(--shadow-md);
+.experience-badge.badge-bounce {
+  animation: badgeBounce 0.65s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
 }
 
-/* Projects Showcase */
-.project-img-wrapper {
-  height: 400px;
+/* ── Stat panel: flush against primary image's right edge ── */
+.stat-right-panel {
+  position: absolute;
+  left: calc(72% + 10px);
+  top: 5%;
+  height: auto;
+  width: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
 }
 
-.project-card:hover h3 {
+/* "Positive Feedback" vertical — reads top to bottom */
+.positive-feedback-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  /* no rotation: naturally reads top → bottom */
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: capitalize;
   color: var(--accent);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* 95% circular ring — pastel sage palette */
+.stat-ring-badge {
+  position: relative;
+  width: 62px;
+  height: 62px;
+  background-color: #B8CCBA;   /* soft pastel sage */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.14);
+}
+
+.stat-ring-svg {
+  position: absolute;
+  inset: 3px;
+}
+
+.stat-ring-num {
+  position: relative;
+  z-index: 1;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary);        /* dark text on pastel bg — readable */
+  line-height: 1;
+}
+
+
+/* ── Key Advantages redesign ─────────────────────── */
+
+/* "Why Choose Blue Craft In Bangalore" eyebrow */
+.advantages-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;           /* bigger than before */
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.advantages-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 2.5px;
+  background-color: var(--accent);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Two-column outer grid — starts at the subtitle level */
+.advantages-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Left column */
+.advantages-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.advantages-heading {
+  font-size: 2.8rem;
+  line-height: 1.1;
+  margin-bottom: 2rem;   /* space between heading and the 2-col grid */
+}
+
+.advantages-subtitle {
+  line-height: 1.75;
+  margin-bottom: 2rem;
+  max-width: 420px;
+}
+
+/* Feature list */
+.advantages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.advantage-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+}
+
+/* Icon circle — light variant */
+.adv-icon-circle {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  border-radius: 50%;
+  background-color: rgba(124, 135, 127, 0.12);
+  border: 1.5px solid rgba(124, 135, 127, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+
+/* Dark variant (Material Transparency row) */
+.adv-icon-circle--dark {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+}
+
+.adv-content {
+  flex: 1;
+}
+
+.adv-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.2px;
+}
+
+.adv-desc {
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* Right column: asymmetric magazine layout */
+.advantages-images {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  height: 580px;
+}
+
+/* First card — tall, spans both rows on the left */
+.adv-img-card:nth-child(1) {
+  grid-row: 1 / 3;
+}
+
+/* Second card — top right */
+.adv-img-card:nth-child(2) {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+/* Third card — bottom right */
+.adv-img-card:nth-child(3) {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+/* Fourth card — hidden (only 3 visible in asymmetric layout) */
+.adv-img-card:nth-child(4) {
+  display: none;
+}
+
+.adv-img-card {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  position: relative;
+}
+
+.adv-img-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.adv-img-card:hover img {
+  transform: scale(1.06);
+}
+
+/* Subtle dark gradient overlay on each image for depth */
+.adv-img-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, transparent 55%, rgba(25,35,36,0.3) 100%);
+  pointer-events: none;
+  border-radius: 14px;
+}
+
+/* ── Projects Showcase ─────────────────────────── */
+
+/* Header: eyebrow + heading on left, button on right */
+.projects-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  gap: 1rem;
+}
+
+.projects-eyebrow {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+.projects-heading {
+  margin: 0;
+}
+
+/* 4-card row -> Marquee slider */
+.projects-marquee-wrap {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  /* Fade edges for a premium look */
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  padding-bottom: 2rem; /* Give room for hover states / shadow */
+}
+
+.projects-marquee-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: marqueeScroll 35s linear infinite;
+  padding: 1rem 0;
+}
+
+.projects-marquee-wrap:hover .projects-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 0.75rem)); }
+}
+
+/* Each card */
+.proj-card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  width: 280px;
+  flex-shrink: 0;
+}
+
+/* Image wrapper with rounded corners */
+.proj-img-wrap {
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+  background: var(--secondary);
+  position: relative;          /* needed for overlay */
+}
+
+.proj-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s ease;
+}
+
+.proj-card:hover .proj-img-wrap img {
+  transform: scale(1.07);
+}
+
+/* "View Gallery" overlay that appears on hover */
+.proj-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(25, 35, 36, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 14px;
+}
+
+.proj-card:hover .proj-overlay {
+  opacity: 1;
+}
+
+.proj-view-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #ffffff;
+  border: 1.5px solid rgba(255,255,255,0.7);
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  backdrop-filter: blur(2px);
+}
+
+/* Text below image */
+.proj-info {
+  padding: 0.9rem 0.25rem 0;
+}
+
+.proj-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+  transition: color 0.2s;
+}
+
+.proj-card:hover .proj-title {
+  color: var(--accent);
+}
+
+.proj-cat {
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+/* ── Testimonials ──────────────────────────────── */
+.testimonials-section {
+  background-color: var(--secondary); /* Light backdrop like reference */
+  padding-bottom: 5rem;
+  padding-top: 2rem;
+}
+
+.testimonial-track {
+  animation: marqueeScroll 45s linear infinite;
+  padding: 1rem 0 2rem;
+}
+
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 280px; /* Slimmer card like reference */
+  flex-shrink: 0;
+  background: var(--white); /* Pure white cards */
+  padding: 2.5rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05); /* Soft drop shadow */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+}
+
+.testi-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+  /* Removed border and heavy shadow to match flat circular look */
+}
+
+.testi-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.testi-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent); /* Accent green matches reference names */
+  margin-bottom: 0.2rem;
+  line-height: 1.3;
+}
+
+.testi-location {
+  font-size: 0.85rem;
+  color: #888888;
+  margin-bottom: 0.8rem;
+}
+
+.testi-stars {
+  display: flex;
+  gap: 0.15rem;
+  color: #ffb703; /* Bright yellow */
+  margin-bottom: 1rem;
+}
+
+.testi-text {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  font-style: italic;
+  color: #666666;
 }
 
 /* Process Section */
 .process-section {
   position: relative;
+  background-color: #f8f9fa; /* Ensure it matches the light grey backdrop */
+  padding: 5rem 0;
 }
 
+/* Eyebrow label above the heading */
+.process-label {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #7C877F;
+  margin-bottom: 0.75rem;
+}
+
+/* Step cards */
+.process-step-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05); /* Match soft shadow */
+  transition: transform 0.3s;
+  position: relative;
+  z-index: 1;
+}
+
+.process-step-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Number badge inside each card */
+.step-num-badge {
+  width: 50px;
+  height: 50px;
+  background-color: var(--white);
+  color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 auto 1.5rem;
+  border: 1.5px solid #8ba39a; /* Sage/grey outline */
+}
+
+/* Connector line between cards on desktop */
 .process-steps {
   position: relative;
 }
@@ -123,20 +739,13 @@
   .process-steps::before {
     content: '';
     position: absolute;
-    top: 40px;
-    left: 10%;
-    right: 10%;
-    height: 2px;
-    background-color: rgba(255, 255, 255, 0.1);
+    top: 65px; /* Aligned behind the circular badge */
+    left: 12.5%;
+    right: 12.5%;
+    height: 1px;
+    background: #d4d8d6; /* Solid light grey line */
     z-index: 0;
   }
 }
 
-.process-step {
-  position: relative;
-  z-index: 1;
-}
-
-.text-gray-300 { color: rgba(255, 255, 255, 0.7); }
-.text-gray-400 { color: rgba(255, 255, 255, 0.6); }
 .text-accent { color: var(--accent); }

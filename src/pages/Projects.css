@@ -1,40 +1,127 @@
-.filter-btn {
-  background-color: var(--white);
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 0.5rem 1.5rem;
-  border-radius: 30px;
+.project-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 4rem; /* Proper gap before the images */
 }
 
-.filter-btn:hover, .filter-btn.active {
-  background-color: var(--primary);
+.filter-btn-new {
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.6rem 1.8rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn-new:hover {
+  background: #f0f0f0;
+}
+
+.filter-btn-new.active {
+  background: var(--primary);
   color: var(--white);
   border-color: var(--primary);
 }
 
 .portfolio-item {
-  position: relative;
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-item:hover {
+  transform: translateY(-5px);
 }
 
 .portfolio-img-wrapper {
   position: relative;
-  height: 350px;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3; /* Landscape ratio reduces massive vertical height */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  background: var(--secondary);
+}
+
+.portfolio-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-item:hover .portfolio-img {
+  transform: scale(1.05);
 }
 
 .portfolio-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to top, rgba(25, 35, 36, 0.9) 0%, rgba(25, 35, 36, 0) 50%);
+  inset: 0;
+  background: rgba(25, 35, 36, 0.35); /* Slightly lighter overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
-  transition: var(--transition);
+  transition: opacity 0.3s ease;
 }
 
 .portfolio-item:hover .portfolio-overlay {
   opacity: 1;
+}
+
+.portfolio-view-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.8);
+  padding: 0.7rem 1.5rem;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.3s ease;
+  transform: translateY(10px);
+}
+
+.portfolio-item:hover .portfolio-view-label {
+  transform: translateY(0);
+}
+
+.portfolio-view-label:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Text below image */
+.portfolio-info {
+  padding: 1.2rem 0.25rem 0;
+}
+
+.portfolio-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.3rem;
+  transition: color 0.2s;
+  letter-spacing: 0.2px;
+}
+
+.portfolio-item:hover .portfolio-title {
+  color: var(--accent);
+}
+
+.portfolio-cat {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .min-h-screen {

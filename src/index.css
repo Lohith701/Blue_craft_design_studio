@@ -61,6 +61,7 @@ ul {
 .text-lg { font-size: 1.125rem; }
 .text-sm { font-size: 0.875rem; }
 .text-muted { color: var(--text-light); }
+.text-white { color: var(--white); }
 
 /* Layout Utilities */
 .container {

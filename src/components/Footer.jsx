@@ -17,10 +17,10 @@ const Footer = () => {
               Bespoke designs that elevate your home and lifestyle. We provide timeless, functional interiors crafted for the way you live.
             </p>
             <div className="social-links text-links">
-              <a href="#" aria-label="Facebook">Fb</a>
-              <a href="#" aria-label="Twitter">X</a>
-              <a href="#" aria-label="Instagram">Ig</a>
-              <a href="#" aria-label="LinkedIn">In</a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Fb</a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">X</a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Ig</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">In</a>
             </div>
           </div>
 

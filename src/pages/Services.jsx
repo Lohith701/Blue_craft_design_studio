@@ -1,6 +1,6 @@
 import React from 'react';
 import PageContainer from '../components/PageContainer';
-import { Home, Layout, PaintBucket, Briefcase, Ruler, Compass } from 'lucide-react';
+import { Home, Layout, PaintBucket, Briefcase, Ruler, Compass, ArrowRight } from 'lucide-react';
 import './Services.css';
 
 const Services = () => {
@@ -51,17 +51,21 @@ const Services = () => {
         </div>
       </div>
 
-      <section className="section bg-secondary">
+      <section className="section services-grid-section">
         <div className="container">
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid grid-cols-3 gap-6">
             {services.map((srv, idx) => (
-              <div key={idx} className="service-card bg-white p-8 rounded-lg shadow-sm text-center">
-                <div className="service-icon-wrapper mb-6 mx-auto">
-                  <srv.icon size={36} className="text-accent" />
+              <div key={idx} className="service-card-new">
+                <div className="service-icon-new">
+                  <srv.icon size={42} strokeWidth={1.5} />
                 </div>
-                <h3 className="h4 mb-4">{srv.title}</h3>
-                <p className="text-muted mb-6">{srv.desc}</p>
-                <a href="/contact" className="btn btn-outline text-sm">Enquire Now</a>
+                <h3 className="service-title-new">{srv.title}</h3>
+                <p className="service-desc-new">{srv.desc}</p>
+                <div className="service-btn-wrap">
+                  <a href="/contact" className="service-btn-new">
+                    Enquire Now <ArrowRight size={18} className="arrow-icon" />
+                  </a>
+                </div>
               </div>
             ))}
           </div>

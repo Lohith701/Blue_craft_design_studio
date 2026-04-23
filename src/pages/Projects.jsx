@@ -1,22 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PageContainer from '../components/PageContainer';
+import ProjectModal from '../components/ProjectModal';
 import './Projects.css';
+
+const PROJECTS_DATA = [
+  {
+    id: 1,
+    title: 'Modern Kitchen',
+    cat:   'Interior / Kitchen',
+    images: ['/images/project2.png', '/images/project1.png', '/images/project2.png'],
+  },
+  {
+    id: 2,
+    title: 'Living Room Design',
+    cat:   'Interior / Living',
+    images: ['/images/project1.png', '/images/project2.png', '/images/project1.png'],
+  },
+  {
+    id: 3,
+    title: 'Master Bedroom',
+    cat:   'Interior / Bedroom',
+    images: ['/images/project2.png', '/images/project1.png'],
+  },
+  {
+    id: 4,
+    title: 'Modern Exterior',
+    cat:   'Exterior / Architecture',
+    images: ['/images/project1.png', '/images/project2.png', '/images/project1.png'],
+  },
+  {
+    id: 5,
+    title: 'Luxury Bathroom',
+    cat:   'Interior / Bath',
+    images: ['/images/project2.png', '/images/project1.png'],
+  },
+  {
+    id: 6,
+    title: 'Minimalist Dining',
+    cat:   'Interior / Dining',
+    images: ['/images/project1.png', '/images/project2.png'],
+  },
+  {
+    id: 7,
+    title: 'Corporate Office',
+    cat:   'Commercial / Office',
+    images: ['/images/project2.png', '/images/project1.png'],
+  },
+  {
+    id: 8,
+    title: 'Boutique Store',
+    cat:   'Commercial / Retail',
+    images: ['/images/hero.png', '/images/project1.png'],
+  },
+];
 
 const Projects = () => {
   const [filter, setFilter] = useState('All');
-  
-  const projects = [
-    { id: 1, title: 'Modern House Exterior', category: 'Exterior', image: '/images/project1.png' },
-    { id: 2, title: 'Premium Kitchen', category: 'Interior', image: '/images/project2.png' },
-    { id: 3, title: 'Luxury Living Room', category: 'Interior', image: '/images/hero.png' },
-    { id: 4, title: 'Minimalist Bedroom', category: 'Interior', image: '/images/project1.png' },
-    { id: 5, title: 'Corporate Office', category: 'Commercial', image: '/images/project2.png' },
-    { id: 6, title: 'Boutique Store', category: 'Commercial', image: '/images/hero.png' },
-  ];
+  const [activeProject, setActiveProject] = useState(null);
 
   const categories = ['All', 'Interior', 'Exterior', 'Commercial'];
 
-  const filteredProjects = filter === 'All' ? projects : projects.filter(p => p.category === filter);
+  const filteredProjects = filter === 'All' 
+    ? PROJECTS_DATA 
+    : PROJECTS_DATA.filter(p => p.cat.includes(filter));
+
+  const openModal = useCallback((project) => {
+    setActiveProject(project);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setActiveProject(null);
+  }, []);
 
   return (
     <PageContainer 
@@ -35,35 +89,41 @@ const Projects = () => {
       <section className="section bg-secondary min-h-screen">
         <div className="container">
           
-          <div className="project-filters mb-10 flex justify-center gap-4 flex-wrap">
+          <div className="project-filters">
             {categories.map(cat => (
               <button 
                 key={cat}
                 onClick={() => setFilter(cat)}
-                className={`btn filter-btn ${filter === cat ? 'active' : ''}`}
+                className={`filter-btn-new ${filter === cat ? 'active' : ''}`}
               >
                 {cat}
               </button>
             ))}
           </div>
 
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-3 gap-8">
             {filteredProjects.map((project) => (
-              <div key={project.id} className="portfolio-item group animate-fade-up">
-                <div className="portfolio-img-wrapper overflow-hidden rounded-lg shadow-sm">
+              <div 
+                key={project.id} 
+                className="portfolio-item animate-fade-up"
+                onClick={() => openModal(project)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && openModal(project)}
+              >
+                <div className="portfolio-img-wrapper">
                   <img 
-                    src={project.image} 
+                    src={project.images[0]} 
                     alt={project.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                    className="portfolio-img" 
                   />
-                  <div className="portfolio-overlay flex flex-col justify-end p-6">
-                    <span className="portfolio-category text-accent uppercase text-sm tracking-wider mb-2 font-semibold">
-                      {project.category}
-                    </span>
-                    <h3 className="portfolio-title h4 text-white transform translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                      {project.title}
-                    </h3>
+                  <div className="portfolio-overlay">
+                    <span className="portfolio-view-label">View Gallery</span>
                   </div>
+                </div>
+                <div className="portfolio-info">
+                  <h3 className="portfolio-title">{project.title}</h3>
+                  <p className="portfolio-cat">{project.cat}</p>
                 </div>
               </div>
             ))}
@@ -71,6 +131,11 @@ const Projects = () => {
           
         </div>
       </section>
+
+      {/* ── Project Modal ── */}
+      {activeProject && (
+        <ProjectModal project={activeProject} onClose={closeModal} />
+      )}
     </PageContainer>
   );
 };

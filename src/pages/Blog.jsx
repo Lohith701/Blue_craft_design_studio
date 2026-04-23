@@ -1,6 +1,7 @@
 import React from 'react';
 import PageContainer from '../components/PageContainer';
 import { Calendar, User, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import './Blog.css';
 
 const Blog = () => {
@@ -63,12 +64,12 @@ const Blog = () => {
                     <span className="flex items-center gap-1"><User size={14} /> {blog.author}</span>
                   </div>
                   <h3 className="h4 mb-3 blog-title transition-colors hover:text-accent">
-                    <a href="#">{blog.title}</a>
+                    <Link to="/blog">{blog.title}</Link>
                   </h3>
                   <p className="text-muted text-sm mb-4">{blog.excerpt}</p>
-                  <a href="#" className="read-more text-primary font-semibold flex items-center gap-2 text-sm uppercase tracking-wider hover:text-accent transition-colors">
+                  <Link to="/blog" className="read-more text-primary font-semibold flex items-center gap-2 text-sm uppercase tracking-wider hover:text-accent transition-colors">
                     Read More <ArrowRight size={16} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
