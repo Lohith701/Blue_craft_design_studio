@@ -8,6 +8,7 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Projects from './pages/Projects';
 import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import Contact from './pages/Contact';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
               <Route path="/services" element={<Services />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogPost />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
           </main>
@@ -34,3 +36,4 @@ function App() {
 }
 
 export default App;
+

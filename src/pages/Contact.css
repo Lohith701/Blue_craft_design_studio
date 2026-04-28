@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  margin-top: 2rem;
 }
 
 .contact-details-list li {
@@ -65,3 +66,14 @@
 .map-section {
   line-height: 0;
 }
+
+@media (max-width: 767px) {
+  /* Stack the 2-col contact grid */
+  .contact-page .grid.grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+  .contact-icon-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+}

@@ -51,52 +51,11 @@
 .portfolio-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
-  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.portfolio-item:hover .portfolio-img {
-  transform: scale(1.05);
-}
 
-.portfolio-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(25, 35, 36, 0.35); /* Slightly lighter overlay */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.portfolio-item:hover .portfolio-overlay {
-  opacity: 1;
-}
-
-.portfolio-view-label {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.8);
-  padding: 0.7rem 1.5rem;
-  border-radius: 999px;
-  backdrop-filter: blur(8px);
-  background: rgba(0, 0, 0, 0.2);
-  transition: background 0.3s ease, transform 0.3s ease;
-  transform: translateY(10px);
-}
-
-.portfolio-item:hover .portfolio-view-label {
-  transform: translateY(0);
-}
-
-.portfolio-view-label:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
 
 /* Text below image */
 .portfolio-info {
@@ -127,3 +86,32 @@
 .min-h-screen {
   min-height: calc(100vh - 300px);
 }
+
+@media (max-width: 767px) {
+  .project-filters {
+    gap: 0.6rem;
+    margin-bottom: 2.5rem;
+  }
+  .filter-btn-new {
+    font-size: 0.82rem;
+    padding: 0.5rem 1.2rem;
+  }
+  /* On mobile use 2 columns so images don't get too tall */
+  .grid-cols-3.portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .portfolio-info {
+    padding: 0.75rem 0.1rem 0;
+  }
+  .portfolio-title {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-cols-3.portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

@@ -1,0 +1,20 @@
+.trending-card {
+  transition: all 0.4s ease;
+}
+
+.trending-img-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(6, 9, 14, 0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.trending-card:hover .trending-img-wrap::after {
+  opacity: 1;
+}
+
+.trending-card:hover {
+  transform: translateY(-5px);
+}

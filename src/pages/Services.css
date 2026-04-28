@@ -105,6 +105,7 @@
 /* Keep the CTA section styles */
 .cta-section {
   position: relative;
+  overflow: hidden;
 }
 
 .cta-section .btn:hover {
@@ -133,3 +134,22 @@
   bottom: -150px;
   right: -100px;
 }
+
+@media (max-width: 767px) {
+  .services-grid-section {
+    padding: 4rem 0;
+  }
+  .service-card-new {
+    padding: 2.5rem 1.5rem;
+  }
+  .cta-section .flex {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .cta-section .flex .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

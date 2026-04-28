@@ -159,3 +159,24 @@ ul {
 .bg-secondary { background-color: var(--secondary); }
 .bg-primary { background-color: var(--primary); color: var(--white); }
 .bg-primary h2, .bg-primary p { color: var(--white); }
+
+/* Spacing utilities */
+.mb-12 { margin-bottom: 3rem; }
+
+/* ── Global Mobile Fixes ── */
+@media (max-width: 767px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+  .section {
+    padding: 3.5rem 0;
+  }
+  /* Stack any 2-col grid to 1 on mobile */
+  .grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+  /* Reduce heading sizes site-wide on small screens */
+  .h2 { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+  .h3 { font-size: clamp(1.3rem, 5vw, 1.8rem); }
+}
+

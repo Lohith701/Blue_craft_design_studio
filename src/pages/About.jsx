@@ -1,22 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PageContainer from '../components/PageContainer';
+import HeroBanner from '../components/HeroBanner';
 import { Target, Lightbulb, Users, Shield } from 'lucide-react';
 import './About.css';
 
+const Counter = ({ end, duration, suffix = "", prefix = "" }) => {
+  const [count, setCount] = useState(0);
+  const [finished, setFinished] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    let observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          const startTime = performance.now();
+          const tick = (now) => {
+            const progress = Math.min((now - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(eased * end));
+            if (progress < 1) {
+              requestAnimationFrame(tick);
+            } else {
+              setCount(end);
+              setFinished(true);
+            }
+          };
+          requestAnimationFrame(tick);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [end, duration]);
+
+  return (
+    <span ref={ref} className={`inline-block ${finished ? 'count-finished' : ''}`}>
+      {prefix}{count}{suffix}
+    </span>
+  );
+};
+
 const About = () => {
   return (
-    <PageContainer 
-      title="About Us" 
+    <PageContainer
+      title="About Us"
       description="Learn about Blue Craft Design Studio, our vision, and the passionate team behind our premium interior designs."
     >
-      <div className="page-header bg-primary">
-        <div className="container">
-          <h1 className="h1 text-white animate-fade-up">About Our Company</h1>
-          <p className="text-gray-300 animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            Designing spaces that inspire and elevate everyday living.
-          </p>
-        </div>
-      </div>
+      <HeroBanner 
+        eyebrow="Who We Are"
+        title="About Us"
+        subtitle="Designing spaces that inspire and elevate everyday living."
+        bgImage="/images/hero-banner/about-banner.jpeg"
+      />
 
       <section className="section">
         <div className="container">
@@ -29,26 +69,26 @@ const About = () => {
               <p className="mb-6 text-muted">
                 Our team of dedicated architects and interior designers is committed to delivering excellence. From initial consultation to final installation, we ensure a smooth, transparent, and enjoyable process for our clients.
               </p>
-              
+
               <div className="stats-grid">
                 <div className="stat-box">
-                  <span className="stat-num text-accent">15+</span>
+                  <span className="stat-num text-accent"><Counter end={15} suffix="+" duration={1500} /></span>
                   <span className="stat-text">Years Experience</span>
                 </div>
                 <div className="stat-box">
-                  <span className="stat-num text-accent">500+</span>
+                  <span className="stat-num text-accent"><Counter end={500} suffix="+" duration={2000} /></span>
                   <span className="stat-text">Projects Completed</span>
                 </div>
                 <div className="stat-box">
-                  <span className="stat-num text-accent">100%</span>
+                  <span className="stat-num text-accent"><Counter end={100} suffix="%" duration={1800} /></span>
                   <span className="stat-text">Client Satisfaction</span>
                 </div>
               </div>
             </div>
-            
+
             <div className="about-images grid grid-cols-2 gap-4">
-              <img src="/images/project1.png" alt="Office Space" className="rounded-lg object-cover h-full" />
-              <img src="/images/project2.png" alt="Design Process" className="rounded-lg object-cover h-full mt-8" />
+              <img src="/images/about1.jpeg" alt="Office Space" className="rounded-lg object-cover h-full" />
+              <img src="/images/about2.jpeg" alt="Design Process" className="rounded-lg object-cover h-full mt-8" />
             </div>
           </div>
         </div>

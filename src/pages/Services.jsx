@@ -1,5 +1,6 @@
 import React from 'react';
 import PageContainer from '../components/PageContainer';
+import HeroBanner from '../components/HeroBanner';
 import { Home, Layout, PaintBucket, Briefcase, Ruler, Compass, ArrowRight } from 'lucide-react';
 import './Services.css';
 
@@ -42,14 +43,12 @@ const Services = () => {
       title="Services" 
       description="Explore our comprehensive range of interior design and property services, including residential, commercial, and bespoke custom furniture."
     >
-      <div className="page-header bg-primary">
-        <div className="container">
-          <h1 className="h1 text-white animate-fade-up">Our Services</h1>
-          <p className="text-gray-300 animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            Comprehensive design solutions for every space and requirement.
-          </p>
-        </div>
-      </div>
+      <HeroBanner 
+        eyebrow="What We Do"
+        title="Services"
+        subtitle="Comprehensive design solutions for every space and requirement."
+        bgImage="/images/hero-banner/services-banner.jpeg"
+      />
 
       <section className="section services-grid-section">
         <div className="container">

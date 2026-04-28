@@ -1,79 +1,95 @@
-import React from 'react';
-import PageContainer from '../components/PageContainer';
-import { Calendar, User, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import PageContainer from '../components/PageContainer';
+import HeroBanner from '../components/HeroBanner';
+import { Calendar, User, ArrowRight } from 'lucide-react';
+import { BLOGS } from '../data/blogData';
 import './Blog.css';
 
-const Blog = () => {
-  const blogs = [
-    {
-      id: 1,
-      title: 'Can Custom Furniture Elevate Your Home’s Aesthetics?',
-      excerpt: 'Discover how bespoke pieces can transform an ordinary room into a statement of your personal style and taste.',
-      date: 'Oct 15, 2025',
-      author: 'Admin',
-      image: '/images/hero.png'
-    },
-    {
-      id: 2,
-      title: 'Flexible Spaces: The Future of Multipurpose Interiors',
-      excerpt: 'Learn how to design adaptable spaces that seamlessly transition from home offices to guest bedrooms.',
-      date: 'Oct 10, 2025',
-      author: 'Admin',
-      image: '/images/project1.png'
-    },
-    {
-      id: 3,
-      title: 'The Psychology of Color in Interior Design',
-      excerpt: 'How different hues and shades can affect your mood, productivity, and overall well-being at home.',
-      date: 'Sep 28, 2025',
-      author: 'Admin',
-      image: '/images/project2.png'
-    }
-  ];
+/* ─── Blog Card ──────────────────────────────────────────── */
+const BlogCard = ({ blog, delay }) => {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setVisible(true), delay);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.12 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [delay]);
 
   return (
-    <PageContainer 
-      title="Trending" 
+    <article
+      ref={ref}
+      className={`blog-card ${visible ? 'card-visible' : ''}`}
+    >
+      {/* Image */}
+      <Link to={`/blog/${blog.id}`} className="blog-card-img-wrap" tabIndex={-1}>
+        <span className="blog-card-category">{blog.category}</span>
+        <img src={blog.image} alt={blog.title} />
+      </Link>
+
+      {/* Body */}
+      <div className="blog-card-body">
+        <div className="blog-card-meta">
+          <span><Calendar size={13} /> {blog.date}</span>
+          <span><User size={13} /> {blog.author}</span>
+        </div>
+        <h3 className="blog-card-title">
+          <Link to={`/blog/${blog.id}`}>{blog.title}</Link>
+        </h3>
+        <p className="blog-card-excerpt">{blog.excerpt}</p>
+        <Link to={`/blog/${blog.id}`} className="blog-read-more">
+          Read More <ArrowRight size={15} />
+        </Link>
+      </div>
+    </article>
+  );
+};
+
+/* ─── Blog Page ──────────────────────────────────────────── */
+const Blog = () => {
+  const topRow = BLOGS.slice(0, 3);
+  const bottomRow = BLOGS.slice(3, 5);
+
+  return (
+    <PageContainer
+      title="Trending | Blue Craft Design"
       description="Read the latest news, trends, and tips on interior design and architecture from Blue Craft Design Studio."
     >
-      <div className="page-header bg-primary">
-        <div className="container">
-          <h1 className="h1 text-white animate-fade-up">Trending</h1>
-          <p className="text-gray-300 animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            Your journey to inspired interiors begins here.
-          </p>
-        </div>
-      </div>
+      <HeroBanner 
+        eyebrow="Market Insights"
+        title="Trending"
+        subtitle="Stay ahead with the latest interior design trends and innovations."
+        bgImage="/images/hero-banner/trending-banner.jpeg"
+      />
 
-      <section className="section min-h-screen">
+      <section className="section" style={{ paddingTop: '4rem' }}>
         <div className="container">
-          <div className="grid grid-cols-3 gap-8">
-            {blogs.map((blog) => (
-              <div key={blog.id} className="blog-card bg-white rounded-lg shadow-sm overflow-hidden animate-fade-up">
-                <div className="blog-img-wrapper overflow-hidden">
-                  <img 
-                    src={blog.image} 
-                    alt={blog.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                  />
-                </div>
-                <div className="blog-content p-6 border border-t-0 border-gray-100 rounded-b-lg">
-                  <div className="blog-meta flex items-center gap-4 text-sm text-accent mb-3">
-                    <span className="flex items-center gap-1"><Calendar size={14} /> {blog.date}</span>
-                    <span className="flex items-center gap-1"><User size={14} /> {blog.author}</span>
-                  </div>
-                  <h3 className="h4 mb-3 blog-title transition-colors hover:text-accent">
-                    <Link to="/blog">{blog.title}</Link>
-                  </h3>
-                  <p className="text-muted text-sm mb-4">{blog.excerpt}</p>
-                  <Link to="/blog" className="read-more text-primary font-semibold flex items-center gap-2 text-sm uppercase tracking-wider hover:text-accent transition-colors">
-                    Read More <ArrowRight size={16} />
-                  </Link>
-                </div>
-              </div>
+
+          {/* Top row — 3 cards */}
+          <div className="blog-grid">
+            {topRow.map((blog, idx) => (
+              <BlogCard key={blog.id} blog={blog} delay={idx * 120} />
             ))}
           </div>
+
+          {/* Bottom row — 2 cards centred */}
+          <div className="blog-grid-bottom" style={{ marginTop: '2rem' }}>
+            {bottomRow.map((blog, idx) => (
+              <BlogCard key={blog.id} blog={blog} delay={(idx + 3) * 120} />
+            ))}
+          </div>
+
         </div>
       </section>
     </PageContainer>

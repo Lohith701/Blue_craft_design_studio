@@ -5,9 +5,10 @@
   display: flex;
   align-items: center;
   padding-top: 80px; /* Offset for fixed header */
+  overflow: hidden;
 }
 
-.hero-bg {
+.hero-slide {
   position: absolute;
   top: 0;
   left: 0;
@@ -16,6 +17,43 @@
   background-size: cover;
   background-position: center;
   z-index: -2;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-in-out, visibility 0s linear 0.8s;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+  transition: opacity 0.8s ease-in-out, visibility 0s linear 0s;
+}
+
+/* Add slight zoom effect on slide image */
+@keyframes slideZoom {
+  from { transform: scale(1.05); }
+  to { transform: scale(1); }
+}
+
+.hero-slide.active {
+  animation: slideZoom 6s ease-out forwards;
+}
+
+/* Only show content for active slide to trigger animations */
+.hero-slide .hero-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out 0.4s, transform 0.6s ease-out 0.4s;
+  color: var(--white);
+  max-width: 800px;
+}
+
+.hero-slide.active .hero-content {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-overlay {
@@ -24,19 +62,31 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, rgba(25, 35, 36, 0.9) 0%, rgba(25, 35, 36, 0.4) 100%);
+  background: linear-gradient(to right, rgba(25, 35, 36, 0.6) 0%, rgba(25, 35, 36, 0.1) 100%);
   z-index: -1;
-}
-
-.hero-content {
-  color: var(--white);
-  max-width: 800px;
 }
 
 .hero-content h1 {
   color: var(--white);
   margin-bottom: 1.5rem;
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background-color: var(--white);
+  margin-left: 6px;
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .hero-content p {
@@ -48,6 +98,71 @@
 .hero-actions {
   display: flex;
   gap: 1.5rem;
+}
+
+/* Slider Controls */
+.hero-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.hero-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.hero-nav-btn.prev {
+  left: 2rem;
+}
+
+.hero-nav-btn.next {
+  right: 2rem;
+}
+
+/* Slider Dots */
+.hero-dots {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.hero-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.hero-dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.hero-dot.active {
+  background: white;
+  width: 32px;
+  border-radius: 6px;
 }
 
 /* ── About Snippet ──────────────────────────────── */
@@ -371,9 +486,18 @@
   display: flex;
   align-items: flex-start;
   gap: 1.1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  margin-left: -0.75rem;
 }
 
-/* Icon circle — light variant */
+.advantage-item:hover {
+  background-color: var(--primary);
+  transform: translateX(6px);
+}
+
 .adv-icon-circle {
   width: 52px;
   height: 52px;
@@ -385,6 +509,13 @@
   align-items: center;
   justify-content: center;
   color: var(--accent);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.advantage-item:hover .adv-icon-circle {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  color: var(--white);
 }
 
 /* Dark variant (Material Transparency row) */
@@ -404,11 +535,21 @@
   color: var(--primary);
   margin-bottom: 0.35rem;
   letter-spacing: 0.2px;
+  transition: color 0.3s ease;
+}
+
+.advantage-item:hover .adv-title {
+  color: var(--white);
 }
 
 .adv-desc {
   font-size: 0.9rem;
   line-height: 1.65;
+  transition: color 0.3s ease;
+}
+
+.advantage-item:hover .adv-desc {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* Right column: asymmetric magazine layout */
@@ -470,10 +611,6 @@
   pointer-events: none;
   border-radius: 14px;
 }
-
-/* ── Projects Showcase ─────────────────────────── */
-
-/* Header: eyebrow + heading on left, button on right */
 .projects-header {
   display: flex;
   align-items: flex-end;
@@ -749,3 +886,200 @@
 }
 
 .text-accent { color: var(--accent); }
+
+/* Pop-up animation for process steps */
+.process-step-wrapper {
+  opacity: 0;
+  transform: scale(0.8) translateY(20px);
+  will-change: transform, opacity;
+}
+
+@keyframes popUp {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.process-step-wrapper.animate-pop-up {
+  animation: popUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+
+.step-num-badge {
+  transition: all 0.3s ease;
+}
+
+.process-step-card:hover .step-num-badge {
+  background-color: #000000;
+  color: var(--white);
+  border-color: #000000;
+  transform: scale(1.1);
+}
+
+/* ── Floating Action Buttons ── */
+.fab-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 9999;
+}
+
+.fab-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+}
+
+.fab-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+}
+
+.fab-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.fab-whatsapp {
+  background-color: #25D366;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+}
+
+.fab-whatsapp:hover {
+  background-color: #1ebe57;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
+}
+
+.fab-call {
+  background-color: #F58220; /* Brand Orange from the image */
+  box-shadow: 0 4px 14px rgba(245, 130, 32, 0.4);
+}
+
+.fab-call:hover {
+  background-color: #e07519;
+  box-shadow: 0 8px 20px rgba(245, 130, 32, 0.5);
+}
+
+@media (max-width: 768px) {
+  .fab-container {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    gap: 0.8rem;
+  }
+  .fab-btn {
+    width: 50px;
+    height: 50px;
+  }
+  .fab-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* ── MOBILE RESPONSIVE STYLES ── */
+@media (max-width: 767px) {
+
+  /* ── Section padding ── */
+  .section {
+    padding: 4rem 0;
+  }
+
+  /* ── Hero ── */
+  .hero-content h1 {
+    font-size: clamp(1.5rem, 6vw, 2.2rem);
+  }
+  .hero-content p {
+    font-size: 1rem;
+  }
+  .hero-actions {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  .hero-nav-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .hero-nav-btn.prev { left: 0.75rem; }
+  .hero-nav-btn.next { right: 0.75rem; }
+
+  /* ── About Snippet ── */
+  .about-snippet .grid {
+    grid-template-columns: 1fr;
+  }
+  .about-visuals {
+    height: 320px;
+    margin-top: 2rem;
+  }
+  .about-img-primary {
+    width: 80%;
+    height: 55%;
+  }
+  .about-img-secondary {
+    width: 70%;
+    height: 50%;
+  }
+  .experience-badge {
+    width: 100px;
+    height: 100px;
+    left: 3%;
+  }
+  .experience-badge .years {
+    font-size: 1.5rem;
+  }
+  .stat-right-panel {
+    left: calc(80% + 6px);
+  }
+  .about-cta-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .btn-pill {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ── Key Advantages ── */
+  .advantages-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .advantages-heading {
+    font-size: 2rem;
+  }
+  .advantages-images {
+    height: 320px;
+  }
+
+  /* ── Projects Marquee header ── */
+  .projects-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* ── Process Steps ── */
+  .process-steps.grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* ── Testimonials header ── */
+  .mb-12 { margin-bottom: 2rem; }
+}
+
