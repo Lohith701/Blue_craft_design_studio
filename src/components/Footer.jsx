@@ -38,7 +38,7 @@ const Footer = () => {
         <div className="footer-grid">
           <div className="footer-col about-col">
             <Link to="/" className="footer-logo">
-              <img src="/images/LOGO.png" alt="Blue Craft Logo" className="footer-logo-img" />
+              <img src="/images/FINAL_LOGO.png" alt="Blue Craft Logo" className="footer-logo-img" />
               <div className="logo-text">
                 <h2>Blue Craft</h2>
                 <span>Design Studio</span>

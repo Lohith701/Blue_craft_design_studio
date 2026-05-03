@@ -32,7 +32,7 @@ const PROJECTS_DATA = [
   {
     id: 3,
     title: 'Foyers',
-    cat: 'Interior / Foyer',
+    cat: 'Foyers',
     images: [
       '/images/foyers/foyers (1).jpeg',
       '/images/foyers/foyers (2).jpeg',
@@ -84,7 +84,7 @@ const PROJECTS_DATA = [
   {
     id: 7,
     title: 'Murals & Paintings',
-    cat: 'Interior / Decor',
+    cat: 'Murals & Paintings',
     images: [
       '/images/muralsPaintings/mural (1).jpeg',
       '/images/muralsPaintings/mural (2).jpeg',
@@ -109,7 +109,7 @@ const PROJECTS_DATA = [
   {
     id: 9,
     title: 'Wallpaper',
-    cat: 'Interior / Decor',
+    cat: 'Wallpaper',
     images: [
       '/images/wallpaper/wall (1).jpeg',
       '/images/wallpaper/wall (2).jpeg',
@@ -140,7 +140,7 @@ const Projects = () => {
   const [filter, setFilter] = useState('All');
   const [activeProject, setActiveProject] = useState(null);
 
-  const categories = ['All', 'Interior', 'Exterior', 'Commercial'];
+  const categories = ['All', 'Interior', 'Foyers', 'Wallpaper', 'Murals & Paintings'];
 
   const filteredProjects = filter === 'All'
     ? PROJECTS_DATA

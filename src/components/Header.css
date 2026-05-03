@@ -283,14 +283,17 @@
   letter-spacing: 0.3px;
 }
 
-.mobile-menu-link:hover,
-.mobile-menu-link.active {
+.mobile-menu-link:hover {
   color: var(--white);
   padding-left: 0.75rem;
 }
 
 .mobile-menu-link.active {
-  color: #B8CCBA; /* sage accent */
+  color: var(--white);
+  background: rgba(184, 204, 186, 0.15);
+  border-left: 4px solid var(--accent);
+  padding-left: 1rem;
+  border-radius: 0 8px 8px 0;
 }
 
 .mobile-link-num {

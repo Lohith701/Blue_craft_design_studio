@@ -1,12 +1,13 @@
 .hero-banner {
   position: relative;
-  height: 320px;
+  height: 380px; /* Increased from 320px to accommodate padding */
   width: 100%;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: inherit;
+  padding-top: 80px; /* Offset for fixed header */
 }
 
 .hero-banner .bg {
@@ -172,7 +173,8 @@
 
 @media (max-width: 768px) {
   .hero-banner {
-    height: 240px;
+    height: 300px; /* Increased from 240px */
+    padding-top: 70px; /* Header offset on mobile */
   }
   .hero-banner h1 {
     font-size: 32px;

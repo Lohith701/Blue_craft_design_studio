@@ -4,16 +4,16 @@ import './Header.css';
 
 const MenuIcon = () => (
   <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-    <rect y="4"  width="22" height="2" rx="1" fill="currentColor"/>
-    <rect y="10" width="22" height="2" rx="1" fill="currentColor"/>
-    <rect y="16" width="16" height="2" rx="1" fill="currentColor"/>
+    <rect y="4" width="22" height="2" rx="1" fill="currentColor" />
+    <rect y="10" width="22" height="2" rx="1" fill="currentColor" />
+    <rect y="16" width="16" height="2" rx="1" fill="currentColor" />
   </svg>
 );
 
 const CloseIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-    <line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-    <line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+    <line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
   </svg>
 );
 
@@ -50,11 +50,11 @@ const Header = () => {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { name: 'Home',       path: '/' },
-    { name: 'About Us',   path: '/about' },
-    { name: 'Services',   path: '/services' },
-    { name: 'Projects',   path: '/projects' },
-    { name: 'Trending',   path: '/blog' },
+    { name: 'Home', path: '/' },
+    { name: 'About Us', path: '/about' },
+    { name: 'Services', path: '/services' },
+    { name: 'Projects', path: '/projects' },
+    { name: 'Trending', path: '/blog' },
     { name: 'Contact Us', path: '/contact' },
   ];
 
@@ -66,7 +66,7 @@ const Header = () => {
         <div className="container header-container">
           {/* Logo */}
           <Link to="/" className="logo">
-            <img src="/images/LOGO.png" alt="Blue Craft Logo" className="logo-img" />
+            <img src="/images/FINAL_LOGO.png" alt="Blue Craft Logo" className="logo-img" />
             <div className="logo-text">
               <h2>Blue Craft</h2>
               <span>Design Studio</span>
@@ -110,10 +110,7 @@ const Header = () => {
       {/* ── Full-screen Mobile Menu ── */}
       <div className={`mobile-menu-overlay ${mobileMenuOpen ? 'open' : ''}`} aria-hidden={!mobileMenuOpen}>
 
-        {/* Close button inside overlay */}
-        <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
-          <CloseIcon />
-        </button>
+
 
         {/* Decorative brand mark */}
         <div className="mobile-menu-brand">
