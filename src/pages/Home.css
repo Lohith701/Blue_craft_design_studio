@@ -1014,15 +1014,44 @@
   }
 
   /* ── Hero ── */
+  .hero {
+    min-height: 100svh; /* use small viewport height on mobile to avoid address-bar jump */
+  }
+
   .hero-slide {
     align-items: flex-end;
     padding-bottom: 8vh;
   }
-  
+
+  /*
+   * object-position fix for mobile:
+   * Desktop keeps "center center" (set on the base rule).
+   * On mobile we shift to "center 20%" so the upper-centre
+   * of the image (where the main subject usually sits) stays
+   * fully visible instead of being cropped by the tall
+   * viewport aspect-ratio.
+   */
+  .hero-slide-img {
+    object-position: center 20%;
+  }
+
+  /* Per-slide fine-tuning — adjust percentages to taste once real images are in */
+  .hero-slide:nth-child(1) .hero-slide-img {
+    object-position: center 15%; /* h1.png — pull subject into upper centre */
+  }
+
+  .hero-slide:nth-child(2) .hero-slide-img {
+    object-position: center 25%; /* img1.jpeg */
+  }
+
+  .hero-slide:nth-child(3) .hero-slide-img {
+    object-position: center 20%; /* img2.png */
+  }
+
   .hero-slide .hero-content {
     margin: 0 auto; /* Restore center alignment for mobile */
   }
-  
+
   .hero-content h1 {
     font-size: clamp(1.5rem, 6vw, 2.2rem);
   }
