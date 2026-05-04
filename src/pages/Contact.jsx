@@ -14,7 +14,7 @@ const Contact = () => {
     const formData = new FormData(e.target);
 
     try {
-      await fetch('https://formsubmit.co/ajax/bluecraftdesignstudio@gmail.com', {
+      await fetch('https://formsubmit.co/ajax/Sales@bluecraftdesignstudio.com', {
         method: 'POST',
         body: formData,
         headers: { Accept: 'application/json' },
@@ -85,10 +85,10 @@ const Contact = () => {
                   <div>
                     <h4 className="font-semibold mb-1">Email Address</h4>
                     <a
-                      href="mailto:bluecraftdesignstudio@gmail.com"
+                      href="mailto:Sales@bluecraftdesignstudio.com"
                       className="text-muted text-sm"
                     >
-                      bluecraftdesignstudio@gmail.com
+                      Sales@bluecraftdesignstudio.com
                     </a>
                   </div>
                 </li>
@@ -102,6 +102,7 @@ const Contact = () => {
                 {/* Formsubmit configuration */}
                 <input type="hidden" name="_captcha" value="false" />
                 <input type="hidden" name="_subject" value="New Contact Form Submission" />
+                <input type="hidden" name="_cc"      value="Projects@bluecraftdesignstudio.com" />
 
                 <div className="form-group">
                   <input

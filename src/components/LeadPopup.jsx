@@ -16,8 +16,8 @@ const LeadPopup = () => {
     // 2. User already closed popup this session without submitting — skip
     if (sessionStorage.getItem(SS_CLOSED)) return;
 
-    // 3. Schedule a single popup appearance after 15 seconds
-    const timer = setTimeout(() => setIsOpen(true), 15000);
+    // 3. Schedule a single popup appearance after 20 seconds
+    const timer = setTimeout(() => setIsOpen(true), 20000);
 
     // Cleanup on unmount — prevents memory leak / stale timer
     return () => clearTimeout(timer);
@@ -37,7 +37,7 @@ const LeadPopup = () => {
     formData.set('Phone', '+91 ' + formData.get('Phone'));
 
     try {
-      await fetch('https://formsubmit.co/ajax/bluecraftdesignstudio@gmail.com', {
+      await fetch('https://formsubmit.co/ajax/Sales@bluecraftdesignstudio.com', {
         method: 'POST',
         body: formData,
         headers: { Accept: 'application/json' },
@@ -79,6 +79,7 @@ const LeadPopup = () => {
           {/* Formsubmit configuration */}
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_subject" value="New Lead Booking Request!" />
+          <input type="hidden" name="_cc"      value="Projects@bluecraftdesignstudio.com" />
 
           <div className="form-group">
             <label htmlFor="popup-name">Name:</label>
