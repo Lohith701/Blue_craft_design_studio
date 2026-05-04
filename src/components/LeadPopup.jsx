@@ -2,25 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import './LeadPopup.css';
 
-const SESSION_KEY = 'bcd_lead_shown';
+const LS_SUBMITTED = 'bcd_lead_submitted'; // localStorage — persists forever
+const SS_CLOSED    = 'bcd_lead_closed';    // sessionStorage — resets each session
 
 const LeadPopup = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen]           = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    // Only show once per browser session; never again after submission
-    if (sessionStorage.getItem(SESSION_KEY)) return;
+    // 1. User already submitted before (any previous session) — never show again
+    if (localStorage.getItem(LS_SUBMITTED)) return;
 
-    const timer = setTimeout(() => {
-      setIsOpen(true);
-      sessionStorage.setItem(SESSION_KEY, '1');
-    }, 15000);
+    // 2. User already closed popup this session without submitting — skip
+    if (sessionStorage.getItem(SS_CLOSED)) return;
 
+    // 3. Schedule a single popup appearance after 15 seconds
+    const timer = setTimeout(() => setIsOpen(true), 15000);
+
+    // Cleanup on unmount — prevents memory leak / stale timer
     return () => clearTimeout(timer);
-  }, []);
+  }, []); // Runs once on mount; React Router remounts this on each navigation
 
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => {
+    // Dismiss for this session only (not permanently)
+    sessionStorage.setItem(SS_CLOSED, '1');
+    setIsOpen(false);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,11 +42,14 @@ const LeadPopup = () => {
         body: formData,
         headers: { Accept: 'application/json' },
       });
-      handleClose();
+
+      // Permanently suppress popup — user submitted, never ask again
+      localStorage.setItem(LS_SUBMITTED, 'true');
+      setIsOpen(false);
       alert('Thank you! We will get back to you shortly.');
       e.target.reset();
     } catch {
-      alert('There was an error submitting the form. Please try again.');
+      alert('There was an error submitting. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -48,7 +58,12 @@ const LeadPopup = () => {
   if (!isOpen) return null;
 
   return (
-    <div className="lead-popup-overlay" role="dialog" aria-modal="true" aria-label="Book a free call">
+    <div
+      className="lead-popup-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Book a free consultation call"
+    >
       <div className="lead-popup-container">
         <button
           className="lead-popup-close"
@@ -57,12 +72,13 @@ const LeadPopup = () => {
         >
           <X size={20} />
         </button>
+
         <h2 className="lead-popup-heading">BOOK A FREE CALL</h2>
 
         <form className="lead-popup-form" onSubmit={handleSubmit}>
           {/* Formsubmit configuration */}
-          <input type="hidden" name="_captcha"  value="false" />
-          <input type="hidden" name="_subject"  value="New Lead Booking Request!" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_subject" value="New Lead Booking Request!" />
 
           <div className="form-group">
             <label htmlFor="popup-name">Name:</label>
