@@ -48,13 +48,13 @@ const Counter = ({ end, duration, suffix = "", prefix = "" }) => {
 const About = () => {
   return (
     <PageContainer
-      title="About Us"
-      description="Learn about Blue Craft Design Studio, our vision, and the passionate team behind our premium interior designs."
+      title="Best Interior Design Firm Bangalore | Blue Craft"
+      description="Blue Craft Design Studio — Bangalore's best interior design firm. 15+ years crafting luxury, modern & minimalist interiors across HSR Layout, Whitefield & beyond."
     >
-      <HeroBanner 
-        eyebrow="Who We Are"
-        title="About Us"
-        subtitle="Designing spaces that inspire and elevate everyday living."
+      <HeroBanner
+        eyebrow="Bangalore's Interior Design Experts"
+        title="About Blue Craft"
+        subtitle="15 years of crafting luxury, modern, and minimalist interiors that Bangalore homeowners love."
         bgImage="/images/hero-banner/about-banner.jpeg"
       />
 
@@ -62,22 +62,30 @@ const About = () => {
         <div className="container">
           <div className="grid grid-cols-2 gap-8 items-center">
             <div className="about-content">
-              <h2 className="h2 mb-6">We turn your vision into reality</h2>
+              <h2 className="h2 mb-6">Bengaluru&apos;s Interior Design Studio — Built on Trust, Driven by Craft</h2>
               <p className="mb-4 text-muted">
-                Blue Craft Design Studio was founded with a singular vision: to create bespoke interiors that seamlessly blend functionality with timeless aesthetics. With over 15 years of experience in the industry, we have transformed countless homes and commercial spaces across Bangalore.
+                Blue Craft Design Studio was born from a simple belief: every home deserves to be designed
+                with intention. Founded over 15 years ago in Bangalore, we have grown into one of the
+                city&apos;s most sought-after interior design firms — not by following trends, but by
+                understanding people. From the quiet elegance of minimalist interior design to the rich
+                layering of luxury interiors, we speak every design language fluently.
               </p>
               <p className="mb-6 text-muted">
-                Our team of dedicated architects and interior designers is committed to delivering excellence. From initial consultation to final installation, we ensure a smooth, transparent, and enjoyable process for our clients.
+                Today, our studio is home to a team of passionate architects, designers, and craftsmen
+                who collectively bring decades of experience to every project. Whether it&apos;s a compact
+                2BHK in HSR Layout or a sprawling villa in Whitefield, we approach each space with the
+                same rigour, creativity, and care. That commitment is why over 500 Bangalore families
+                have trusted us to design the home they always imagined.
               </p>
 
               <div className="stats-grid">
                 <div className="stat-box">
                   <span className="stat-num text-accent"><Counter end={15} suffix="+" duration={1500} /></span>
-                  <span className="stat-text">Years Experience</span>
+                  <span className="stat-text">Years in Bangalore</span>
                 </div>
                 <div className="stat-box">
                   <span className="stat-num text-accent"><Counter end={500} suffix="+" duration={2000} /></span>
-                  <span className="stat-text">Projects Completed</span>
+                  <span className="stat-text">Homes Transformed</span>
                 </div>
                 <div className="stat-box">
                   <span className="stat-num text-accent"><Counter end={100} suffix="%" duration={1800} /></span>
@@ -96,13 +104,29 @@ const About = () => {
 
       <section className="section bg-secondary">
         <div className="container text-center">
-          <h2 className="h2 mb-12">Our Core Values</h2>
+          <h2 className="h2 mb-12">The Values That Define Every Project We Take On</h2>
           <div className="core-values-grid">
             {[
-              { icon: Target, title: 'Precision', desc: 'Meticulous attention to detail in every aspect of design and execution.' },
-              { icon: Lightbulb, title: 'Innovation', desc: 'Constantly exploring new materials, trends, and sustainable practices.' },
-              { icon: Users, title: 'Collaboration', desc: 'Working closely with clients to ensure their personality shines through.' },
-              { icon: Shield, title: 'Integrity', desc: 'Transparent pricing and honest communication from start to finish.' },
+              {
+                icon: Target,
+                title: 'Uncompromising Precision',
+                desc: 'From millimetre-accurate cabinetry to perfectly matched colour palettes — every detail is intentional. Great interiors are built in the details.',
+              },
+              {
+                icon: Lightbulb,
+                title: 'Design That Evolves',
+                desc: 'We stay ahead of modern interior design trends without chasing them blindly. Every innovation we adopt must serve your space and lifestyle first.',
+              },
+              {
+                icon: Users,
+                title: 'Your Vision, Centre Stage',
+                desc: 'We are interior designers in Bangalore who listen first. Your life, your preferences, and your budget shape every decision we make together.',
+              },
+              {
+                icon: Shield,
+                title: 'Radical Transparency',
+                desc: 'Itemised quotes. No hidden costs. No inflated markups. You know exactly what you\'re paying for at every stage — because trust is non-negotiable.',
+              },
             ].map((val, idx) => (
               <div key={idx} className="value-card">
                 <div className="value-icon-wrap">
