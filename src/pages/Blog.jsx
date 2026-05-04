@@ -63,7 +63,7 @@ const Blog = () => {
 
   return (
     <PageContainer
-      title="Trending | Blue Craft Design"
+      title="Trending"
       description="Read the latest news, trends, and tips on interior design and architecture from Blue Craft Design Studio."
     >
       <HeroBanner 

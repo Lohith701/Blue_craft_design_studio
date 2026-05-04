@@ -5,23 +5,27 @@ import { MapPin, Phone, Mail } from 'lucide-react';
 import './Contact.css';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form submitted:', formData);
-    alert('Thank you for contacting us! We will get back to you soon.');
-    setFormData({ name: '', email: '', phone: '', message: '' });
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.target);
+
+    try {
+      await fetch('https://formsubmit.co/ajax/bluecraftdesignstudio@gmail.com', {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' },
+      });
+      alert('Thank you! We will get back to you within 24 hours.');
+      e.target.reset();
+    } catch {
+      alert('Something went wrong. Please call us directly at +91 98869 33999.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -29,7 +33,7 @@ const Contact = () => {
       title="Contact Us"
       description="Get in touch with Blue Craft Design Studio. Book your free consultation and start your journey to a beautifully designed home."
     >
-      <HeroBanner 
+      <HeroBanner
         eyebrow="Get In Touch"
         title="Contact Us"
         subtitle="We'd love to hear from you. Let's build something amazing together."
@@ -38,13 +42,16 @@ const Contact = () => {
 
       <section className="section bg-secondary">
         <div className="container">
-          <div className="grid grid-cols-2 gap-12 bg-white p-8 md:p-12 rounded-xl shadow-lg relative -mt-32 z-10 animate-fade-up" style={{ animationDelay: '0.4s' }}>
-
+          <div
+            className="grid grid-cols-2 gap-12 bg-white p-8 rounded-xl shadow-lg relative -mt-32 z-10 animate-fade-up"
+            style={{ animationDelay: '0.4s' }}
+          >
             {/* Contact Info */}
             <div className="contact-info">
               <h2 className="h2 mb-4">Get in Touch</h2>
               <p className="text-muted mb-10" style={{ lineHeight: '1.8' }}>
-                Fill out the form and our team will get back to you within 24 hours. Alternatively, you can reach us directly via phone or email.
+                Fill out the form and our team will get back to you within 24 hours.
+                Alternatively, you can reach us directly via phone or email.
               </p>
 
               <ul className="contact-details-list">
@@ -54,7 +61,10 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Our Location</h4>
-                    <p className="text-muted text-sm">club circle 754/1, 19 th main, 22nd Cross Rd, Sector 2, HSR Layout, Bengaluru, Karnataka 560102</p>
+                    <p className="text-muted text-sm">
+                      club circle 754/1, 19th main, 22nd Cross Rd, Sector 2,
+                      HSR Layout, Bengaluru, Karnataka 560102
+                    </p>
                   </div>
                 </li>
                 <li>
@@ -63,7 +73,9 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Phone Number</h4>
-                    <a href="tel:+919886933999" className="text-muted text-sm hover:text-accent">+91 98869 33999</a>
+                    <a href="tel:+919886933999" className="text-muted text-sm">
+                      +91 98869 33999
+                    </a>
                   </div>
                 </li>
                 <li>
@@ -72,7 +84,12 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Email Address</h4>
-                    <a href="mailto:bluecraftdesignstudio@gmail.com" className="text-muted text-sm hover:text-accent">bluecraftdesignstudio@gmail.com</a>
+                    <a
+                      href="mailto:bluecraftdesignstudio@gmail.com"
+                      className="text-muted text-sm"
+                    >
+                      bluecraftdesignstudio@gmail.com
+                    </a>
                   </div>
                 </li>
               </ul>
@@ -82,51 +99,56 @@ const Contact = () => {
             <div className="contact-form-wrapper">
               <h3 className="h3 mb-6">Send a Message</h3>
               <form onSubmit={handleSubmit} className="contact-form">
+                {/* Formsubmit configuration */}
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_subject" value="New Contact Form Submission" />
+
                 <div className="form-group">
                   <input
                     type="text"
-                    name="name"
+                    name="Name"
                     placeholder="Your Name"
-                    value={formData.name}
-                    onChange={handleChange}
                     required
+                    aria-label="Your Name"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="form-group">
                     <input
                       type="email"
-                      name="email"
+                      name="Email"
                       placeholder="Your Email"
-                      value={formData.email}
-                      onChange={handleChange}
                       required
+                      aria-label="Your Email"
                     />
                   </div>
                   <div className="form-group">
                     <input
                       type="tel"
-                      name="phone"
+                      name="Phone"
                       placeholder="Your Phone"
-                      value={formData.phone}
-                      onChange={handleChange}
+                      aria-label="Your Phone"
                     />
                   </div>
                 </div>
                 <div className="form-group">
                   <textarea
-                    name="message"
+                    name="Message"
                     rows="5"
                     placeholder="Tell us about your project..."
-                    value={formData.message}
-                    onChange={handleChange}
                     required
-                  ></textarea>
+                    aria-label="Your message"
+                  />
                 </div>
-                <button type="submit" className="btn btn-primary w-full">Submit Message</button>
+                <button
+                  type="submit"
+                  className="btn btn-primary w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Sending…' : 'Submit Message'}
+                </button>
               </form>
             </div>
-
           </div>
         </div>
       </section>
@@ -134,15 +156,15 @@ const Contact = () => {
       {/* Map Section */}
       <section className="map-section">
         <iframe
-          title="Blue Craft Location"
-          src="https://www.google.com/maps?q=Blue+Craft+Design+Studio+Private+Limited+Bangalore&output=embed"
+          title="Blue Craft Design Studio Location"
+          src="https://maps.google.com/maps?q=Blue+Craft+Design+Studio,+HSR+Layout,+Bengaluru&z=15&output=embed"
           width="100%"
           height="450"
           style={{ border: 0, display: 'block' }}
           allowFullScreen=""
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
+        />
       </section>
     </PageContainer>
   );

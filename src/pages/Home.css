@@ -15,8 +15,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
   z-index: -2;
   opacity: 0;
   visibility: hidden;
@@ -24,6 +22,20 @@
   display: flex;
   align-items: flex-end;
   padding-bottom: 15vh;
+  overflow: hidden;
+}
+
+/* Hero slide background image — rendered as <img> for LCP optimisation */
+.hero-slide-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+  display: block;
+  /* override global img { height: auto } */
 }
 
 .hero-slide.active {
@@ -1115,5 +1127,46 @@
   /* ── Testimonials header ── */
   .mb-12 {
     margin-bottom: 2rem;
+  }
+}
+
+/* ── Accessibility: stop all decorative motion for users who prefer it ── */
+@media (prefers-reduced-motion: reduce) {
+  .projects-marquee-track,
+  .testimonial-track {
+    animation: none !important;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-slide {
+    transition: none !important;
+  }
+
+  .hero-slide.active {
+    animation: none !important;
+  }
+
+  .hero-slide-img {
+    animation: none !important;
+  }
+
+  .animate-fade-up,
+  .page-wrapper {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .process-step-wrapper {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .adv-img-card img,
+  .proj-img-wrap img {
+    transition: none !important;
   }
 }

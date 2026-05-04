@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import About from './pages/About';
-import Services from './pages/Services';
-import Projects from './pages/Projects';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import Contact from './pages/Contact';
 import LeadPopup from './components/LeadPopup';
+
+// ── Code-split every page: each route loads its own JS chunk ──
+const Home     = lazy(() => import('./pages/Home'));
+const About    = lazy(() => import('./pages/About'));
+const Services = lazy(() => import('./pages/Services'));
+const Projects = lazy(() => import('./pages/Projects'));
+const Blog     = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const Contact  = lazy(() => import('./pages/Contact'));
+
+// Minimal fullscreen fallback — no layout shift, no spinner flash
+const PageFallback = () => (
+  <div style={{ minHeight: '100vh', background: '#F8F8F8' }} aria-hidden="true" />
+);
 
 function App() {
   return (
@@ -19,15 +26,17 @@ function App() {
         <div className="flex flex-col min-h-screen">
           <Header />
           <main style={{ flexGrow: 1 }}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:id" element={<BlogPost />} />
-              <Route path="/contact" element={<Contact />} />
-            </Routes>
+            <Suspense fallback={<PageFallback />}>
+              <Routes>
+                <Route path="/"        element={<Home />} />
+                <Route path="/about"   element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/blog"    element={<Blog />} />
+                <Route path="/blog/:id" element={<BlogPost />} />
+                <Route path="/contact" element={<Contact />} />
+              </Routes>
+            </Suspense>
           </main>
           <Footer />
         </div>
@@ -38,7 +47,7 @@ function App() {
         {/* ── Floating Action Buttons ── */}
         <div className="fab-container">
           <a
-            href="https://wa.me/9886933999?text=Hello%2C%20I%20want%20to%20book%20a%20free%20consultation"
+            href="https://wa.me/919886933999?text=Hello%2C%20I%20want%20to%20book%20a%20free%20consultation"
             target="_blank"
             rel="noopener noreferrer"
             className="fab-btn fab-whatsapp"
@@ -49,7 +58,7 @@ function App() {
             </svg>
           </a>
           <a
-            href="tel:9886933999"
+            href="tel:+919886933999"
             className="fab-btn fab-call"
             aria-label="Call Us"
           >
@@ -64,4 +73,3 @@ function App() {
 }
 
 export default App;
-

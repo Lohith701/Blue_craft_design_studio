@@ -87,8 +87,8 @@ const About = () => {
             </div>
 
             <div className="about-images grid grid-cols-2 gap-4">
-              <img src="/images/about1.jpeg" alt="Office Space" className="rounded-lg object-cover h-full" />
-              <img src="/images/about2.jpeg" alt="Design Process" className="rounded-lg object-cover h-full mt-8" />
+              <img src="/images/about1.jpeg" alt="Blue Craft office and studio space" className="rounded-lg object-cover h-full" loading="lazy" width="500" height="600" />
+              <img src="/images/about2.jpeg" alt="Blue Craft design process in action" className="rounded-lg object-cover h-full mt-8" loading="lazy" width="500" height="600" />
             </div>
           </div>
         </div>

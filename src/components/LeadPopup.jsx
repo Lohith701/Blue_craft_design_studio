@@ -2,42 +2,44 @@ import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import './LeadPopup.css';
 
+const SESSION_KEY = 'bcd_lead_shown';
+
 const LeadPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    // Show popup initially after 15 seconds, and then every 15 seconds if closed
-    const timer = setInterval(() => {
+    // Only show once per browser session; never again after submission
+    if (sessionStorage.getItem(SESSION_KEY)) return;
+
+    const timer = setTimeout(() => {
       setIsOpen(true);
+      sessionStorage.setItem(SESSION_KEY, '1');
     }, 15000);
 
-    return () => clearInterval(timer);
+    return () => clearTimeout(timer);
   }, []);
+
+  const handleClose = () => setIsOpen(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     const formData = new FormData(e.target);
-    // Include the +91 prefix in the submitted phone number
     formData.set('Phone', '+91 ' + formData.get('Phone'));
 
     try {
-      await fetch("https://formsubmit.co/ajax/lohithobulapuram@gmail.com", {
-        method: "POST",
+      await fetch('https://formsubmit.co/ajax/bluecraftdesignstudio@gmail.com', {
+        method: 'POST',
         body: formData,
-        headers: {
-            'Accept': 'application/json'
-        }
+        headers: { Accept: 'application/json' },
       });
-      
-      setIsOpen(false);
-      alert("Thank you! We will get back to you shortly.");
-      e.target.reset(); // Reset form for next time
-    } catch (error) {
-      console.error(error);
-      alert("There was an error submitting the form. Please try again.");
+      handleClose();
+      alert('Thank you! We will get back to you shortly.');
+      e.target.reset();
+    } catch {
+      alert('There was an error submitting the form. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -46,48 +48,54 @@ const LeadPopup = () => {
   if (!isOpen) return null;
 
   return (
-    <div className="lead-popup-overlay">
+    <div className="lead-popup-overlay" role="dialog" aria-modal="true" aria-label="Book a free call">
       <div className="lead-popup-container">
-        <button className="lead-popup-close" onClick={() => setIsOpen(false)} aria-label="Close popup">
+        <button
+          className="lead-popup-close"
+          onClick={handleClose}
+          aria-label="Close popup"
+        >
           <X size={20} />
         </button>
         <h2 className="lead-popup-heading">BOOK A FREE CALL</h2>
-        
+
         <form className="lead-popup-form" onSubmit={handleSubmit}>
-          {/* Prevent captcha from formsubmit */}
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_subject" value="New Lead Booking Request!" />
-          
+          {/* Formsubmit configuration */}
+          <input type="hidden" name="_captcha"  value="false" />
+          <input type="hidden" name="_subject"  value="New Lead Booking Request!" />
+
           <div className="form-group">
-            <label>Name:</label>
-            <input 
-              type="text" 
-              name="Name" 
-              pattern="[A-Za-z\s]+" 
+            <label htmlFor="popup-name">Name:</label>
+            <input
+              id="popup-name"
+              type="text"
+              name="Name"
+              pattern="[A-Za-z\s]+"
               title="Only alphabets and spaces are allowed"
-              required 
+              required
               placeholder="Enter your name"
             />
           </div>
 
           <div className="form-group">
-            <label>Phone No:</label>
+            <label htmlFor="popup-phone">Phone No:</label>
             <div className="phone-input-wrapper">
               <span className="phone-prefix">+91</span>
-              <input 
-                type="tel" 
-                name="Phone" 
-                pattern="[0-9]{10}" 
+              <input
+                id="popup-phone"
+                type="tel"
+                name="Phone"
+                pattern="[0-9]{10}"
                 title="Please enter a valid 10-digit number"
-                required 
+                required
                 placeholder="10-digit mobile number"
               />
             </div>
           </div>
 
           <div className="form-group">
-            <label>Requirement:</label>
-            <select name="Requirement" required defaultValue="">
+            <label htmlFor="popup-requirement">Requirement:</label>
+            <select id="popup-requirement" name="Requirement" required defaultValue="">
               <option value="" disabled>Select an option</option>
               <option value="1BHK">1BHK</option>
               <option value="2BHK">2BHK</option>
@@ -98,17 +106,22 @@ const LeadPopup = () => {
           </div>
 
           <div className="form-group">
-            <label>Location:</label>
-            <input 
-              type="text" 
-              name="Location" 
-              required 
+            <label htmlFor="popup-location">Location:</label>
+            <input
+              id="popup-location"
+              type="text"
+              name="Location"
+              required
               placeholder="Enter your location"
             />
           </div>
 
-          <button type="submit" className="btn btn-primary lead-submit-btn" disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...' : 'Submit'}
+          <button
+            type="submit"
+            className="btn btn-primary lead-submit-btn"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Submitting…' : 'Submit'}
           </button>
         </form>
       </div>

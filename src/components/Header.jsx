@@ -22,7 +22,8 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  const isSinglePost = location.pathname.match(/^\/blog\/\d+/);
+  // Also force scrolled style on blog post pages
+  const isSinglePost = location.pathname.match(/^\/blog\/.+/);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -91,7 +92,7 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="header-actions">
-            <a href="tel:9886933999" className="btn btn-primary desktop-btn">
+            <a href="tel:+919886933999" className="btn btn-primary desktop-btn">
               +91 98869 33999
             </a>
             {/* Hamburger — always visible on mobile */}
@@ -114,7 +115,7 @@ const Header = () => {
 
         {/* Decorative brand mark */}
         <div className="mobile-menu-brand">
-          <img src="/images/LOGO.png" alt="Blue Craft Logo" className="mobile-menu-logo" />
+          <img src="/images/FINAL_LOGO.png" alt="Blue Craft Logo" className="mobile-menu-logo" />
           <span>Blue Craft Design Studio</span>
         </div>
 
@@ -142,7 +143,7 @@ const Header = () => {
 
         {/* CTA at bottom */}
         <div className="mobile-menu-footer">
-          <a href="tel:9886933999" className="btn btn-primary mobile-menu-cta" onClick={() => setMobileMenuOpen(false)}>
+          <a href="tel:+919886933999" className="btn btn-primary mobile-menu-cta" onClick={() => setMobileMenuOpen(false)}>
             +91 98869 33999
           </a>
           <p className="mobile-menu-tagline">Premium Interior Design Studio</p>

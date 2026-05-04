@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import PageContainer from '../components/PageContainer';
 import ProjectModal from '../components/ProjectModal';
-import { ArrowRight, CheckCircle2, LayoutDashboard, Eye, Tag, Layers, Award, Clock, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, CheckCircle2, LayoutDashboard, Eye, Tag, Layers, Award, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { PROJECTS_DATA } from '../data/projectsData';
 import './Home.css';
 
 /* ── Typewriter Component ── */
@@ -20,9 +21,7 @@ const TypewriterText = ({ text, isActive }) => {
     const interval = setInterval(() => {
       setDisplayedText(text.substring(0, i + 1));
       i++;
-      if (i >= text.length) {
-        clearInterval(interval);
-      }
+      if (i >= text.length) clearInterval(interval);
     }, 50);
 
     return () => clearInterval(interval);
@@ -31,7 +30,7 @@ const TypewriterText = ({ text, isActive }) => {
   return (
     <span>
       {displayedText}
-      {isActive && <span className="typewriter-cursor"></span>}
+      {isActive && <span className="typewriter-cursor" />}
     </span>
   );
 };
@@ -44,7 +43,6 @@ const ScrollTypewriterText = ({ text }) => {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -81,129 +79,6 @@ const HERO_SLIDES = [
     image: '/images/img2.png',
     title: 'We create spaces where families actually want to spend time together',
     desc: '',
-  }
-];
-
-/* ── Project data with multiple images per project ── */
-const PROJECTS = [
-  {
-    title: 'Cots',
-    cat: 'Interior / Bedroom',
-    images: [
-      '/images/cots/cot (1).jpeg',
-      '/images/cots/cot (2).jpeg',
-      '/images/cots/cot (3).jpeg',
-      '/images/cots/cot (4).jpeg',
-      '/images/cots/cot (5).jpeg',
-      '/images/cots/cot (6).jpeg',
-    ],
-  },
-  {
-    title: 'False ceiling',
-    cat: 'Interior / Ceiling',
-    images: [
-      '/images/falseCeiling/fc (1).jpeg',
-      '/images/falseCeiling/fc (2).jpeg',
-      '/images/falseCeiling/fc (3).jpeg',
-    ],
-  },
-  {
-    title: 'Foyers',
-    cat: 'Foyers',
-    images: [
-      '/images/foyers/foyers (1).jpeg',
-      '/images/foyers/foyers (2).jpeg',
-      '/images/foyers/foyers (3).jpeg',
-      '/images/foyers/foyers (4).jpeg',
-      '/images/foyers/foyers (5).jpeg',
-    ],
-  },
-  {
-    title: 'Kids bedroom',
-    cat: 'Interior / Bedroom',
-    images: [
-      '/images/kidsBedroom/kids (1).jpeg',
-      '/images/kidsBedroom/kids (2).jpeg',
-      '/images/kidsBedroom/kids (3).jpeg',
-      '/images/kidsBedroom/kids (4).jpeg',
-      '/images/kidsBedroom/kids (5).jpeg',
-      '/images/kidsBedroom/kids (6).jpeg',
-      '/images/kidsBedroom/kids (7).jpeg',
-    ],
-  },
-  {
-    title: 'Kitchens',
-    cat: 'Interior / Kitchen',
-    images: [
-      '/images/kitchens/kitchen (1).jpeg',
-      '/images/kitchens/kitchen (2).jpeg',
-      '/images/kitchens/kitchen (3).jpeg',
-      '/images/kitchens/kitchen (4).jpeg',
-      '/images/kitchens/kitchen (5).jpeg',
-      '/images/kitchens/kitchen (6).jpeg',
-
-    ],
-  },
-  {
-    title: 'Living',
-    cat: 'Interior / Living',
-    images: [
-      '/images/living/living (1).jpeg',
-      '/images/living/living (2).jpeg',
-      '/images/living/living (3).jpeg',
-      '/images/living/living (4).jpeg',
-      '/images/living/living (5).jpeg',
-      '/images/living/living (6).jpeg',
-    ],
-  },
-  {
-    title: 'Murals & Paintings',
-    cat: 'Murals & Paintings',
-    images: [
-      '/images/muralsPaintings/mural (1).jpeg',
-      '/images/muralsPaintings/mural (2).jpeg',
-      '/images/muralsPaintings/mural (3).jpeg',
-      '/images/muralsPaintings/mural (4).jpeg',
-      '/images/muralsPaintings/mural (5).jpeg',
-      '/images/muralsPaintings/mural (6).jpeg',
-    ],
-  },
-  {
-    title: 'Pooja unit',
-    cat: 'Interior / Pooja',
-    images: [
-      '/images/poojaUnit/pooja (1).jpeg',
-      '/images/poojaUnit/pooja (2).jpeg',
-      '/images/poojaUnit/pooja (3).jpeg',
-      '/images/poojaUnit/pooja (4).jpeg',
-
-    ],
-  },
-  {
-    title: 'Wallpaper',
-    cat: 'Wallpaper',
-    images: [
-      '/images/wallpaper/wall (1).jpeg',
-      '/images/wallpaper/wall (2).jpeg',
-      '/images/wallpaper/wall (3).jpeg',
-      '/images/wallpaper/wall (4).jpeg',
-      '/images/wallpaper/wall (5).jpeg',
-
-    ],
-  },
-  {
-    title: 'Wardrobe',
-    cat: 'Interior / Wardrobe',
-    images: [
-      '/images/wardrobe/wardrobe (1).jpeg',
-      '/images/wardrobe/wardrobe (2).jpeg',
-      '/images/wardrobe/wardrobe (3).jpeg',
-      '/images/wardrobe/wardrobe (4).jpeg',
-      '/images/wardrobe/wardrobe (5).jpeg',
-      '/images/wardrobe/wardrobe (6).jpeg',
-      '/images/wardrobe/wardrobe (7).jpeg',
-      '/images/wardrobe/wardrobe (8).jpeg',
-    ],
   },
 ];
 
@@ -214,74 +89,74 @@ const TESTIMONIALS = [
     location: 'Bangalore',
     img: '/images/Testimonials/Shambhuprasad - Geethika.jpeg',
     rating: 5,
-    text: "Wonderful decision, amazing work delivered.",
+    text: 'Wonderful decision, amazing work delivered.',
   },
   {
     name: 'Mohan - Jyothi',
     location: 'Bangalore',
     img: '/images/Testimonials/Mohan-Jyothi.jpeg',
     rating: 5,
-    text: "High-quality work and timely responses.",
+    text: 'High-quality work and timely responses.',
   },
   {
     name: 'Venki - Devi',
     location: 'Bangalore',
     img: '/images/Testimonials/venki-Devi.jpeg',
     rating: 5,
-    text: "Great design options and smooth experience.",
+    text: 'Great design options and smooth experience.',
   },
   {
     name: 'Dhamodhar - Navaneetha',
     location: 'Bangalore',
     img: '/images/Testimonials/Dhamodhar-Navaneetha.jpeg',
     rating: 5,
-    text: "Wonderful decision, amazing work delivered.",
+    text: 'Wonderful decision, amazing work delivered.',
   },
   {
     name: 'Mahesh - Bhargavi',
     location: 'Bangalore',
     img: '/images/Testimonials/Mahesh - Bhargavi.jpeg',
     rating: 5,
-    text: "Very professional team. The best interior designers in Bangalore!",
+    text: 'Very professional team. The best interior designers in Bangalore!',
   },
   {
     name: 'Karthik - Yesswini',
     location: 'Bangalore',
     img: '/images/Testimonials/Karthik - Yesswini.jpeg',
     rating: 5,
-    text: "They utilized our space so efficiently without making it feel cluttered.",
-  }
+    text: 'They utilized our space so efficiently without making it feel cluttered.',
+  },
 ];
 
-/* ── helper: animate a number from `from` to `to` over `duration` ms ── */
+/* ── helper: animate a number ── */
 function animateCount(from, to, duration, setter) {
   const startTime = performance.now();
   const tick = (now) => {
     const progress = Math.min((now - startTime) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
     setter(Math.floor(eased * (to - from) + from));
     if (progress < 1) requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
 }
 
-const CIRC = 2 * Math.PI * 45; // SVG circle circumference (r=45)
+const CIRC = 2 * Math.PI * 45;
 
 const Home = () => {
-  const aboutRef = useRef(null);
+  const aboutRef   = useRef(null);
   const processRef = useRef(null);
-  const [inView, setInView] = useState(false);
+  const [inView, setInView]             = useState(false);
   const [processInView, setProcessInView] = useState(false);
-  const [yearsCount, setYearsCount] = useState(0);
-  const [satisfCount, setSatisfCount] = useState(0);
-  const [yearsReady, setYearsReady] = useState(false);
+  const [yearsCount, setYearsCount]     = useState(0);
+  const [satisfCount, setSatisfCount]   = useState(0);
+  const [yearsReady, setYearsReady]     = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [activeProject, setActiveProject] = useState(null);
 
-  /* ── Modal state ── */
-  const [activeProject, setActiveProject] = useState(null); // null = closed
-  const openModal = useCallback((project) => setActiveProject(project), []);
+  const openModal  = useCallback((project) => setActiveProject(project), []);
   const closeModal = useCallback(() => setActiveProject(null), []);
 
+  /* ── Hero auto-advance ── */
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
@@ -289,7 +164,7 @@ const Home = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Intersection observer — fires once when section is 30% visible
+  /* ── About section observer ── */
   useEffect(() => {
     const el = aboutRef.current;
     if (!el) return;
@@ -300,9 +175,9 @@ const Home = () => {
           animateCount(0, 95, 1800, setSatisfCount);
           animateCount(0, 15, 1500, (v) => {
             setYearsCount(v);
-            if (v === 15) setYearsReady(true); // fire bounce at the end
+            if (v === 15) setYearsReady(true);
           });
-          observer.disconnect(); // run only once
+          observer.disconnect();
         }
       },
       { threshold: 0.3 }
@@ -311,7 +186,7 @@ const Home = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Intersection observer for Process Section
+  /* ── Process section observer ── */
   useEffect(() => {
     const el = processRef.current;
     if (!el) return;
@@ -319,7 +194,7 @@ const Home = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setProcessInView(true);
-          observer.disconnect(); // run only once
+          observer.disconnect();
         }
       },
       { threshold: 0.2 }
@@ -328,7 +203,6 @@ const Home = () => {
     return () => observer.disconnect();
   }, []);
 
-  // stroke offset for SVG ring
   const strokeOffset = CIRC - (satisfCount / 100) * CIRC;
 
   return (
@@ -343,20 +217,53 @@ const Home = () => {
             <div
               key={idx}
               className={`hero-slide ${idx === currentSlide ? 'active' : ''}`}
-              style={{ backgroundImage: `url('${slide.image}')` }}
             >
-              <div className="hero-overlay"></div>
+              {/*
+                Slide 0: fetchpriority="high" (LCP image — load immediately)
+                Slide 1+: loading="lazy" (only loaded when needed)
+              */}
+              <img
+                src={slide.image}
+                alt={slide.title.replace(/\n/g, ' ')}
+                className="hero-slide-img"
+                fetchpriority={idx === 0 ? 'high' : 'low'}
+                loading={idx === 0 ? 'eager' : 'lazy'}
+                width="1920"
+                height="1080"
+                decoding={idx === 0 ? 'sync' : 'async'}
+              />
+              <div className="hero-overlay" />
               <div className="container hero-content">
                 <h1 className="animate-fade-up" key={`h1-${idx}-${currentSlide}`}>
                   <TypewriterText text={slide.title} isActive={idx === currentSlide} />
                 </h1>
                 {slide.desc && (
-                  <p className="animate-fade-up" style={{ animationDelay: '0.2s' }} key={`p-${idx}-${currentSlide}`}>
+                  <p
+                    className="animate-fade-up"
+                    style={{ animationDelay: '0.2s' }}
+                    key={`p-${idx}-${currentSlide}`}
+                  >
                     {slide.desc}
                   </p>
                 )}
-                <div className="hero-actions animate-fade-up" style={{ animationDelay: '0.4s' }} key={`acts-${idx}-${currentSlide}`}>
-                  <Link to="/contact" className="btn btn-outline" style={{ color: 'white', borderColor: 'white', display: 'inline-flex', alignItems: 'center', gap: '0.8rem', padding: '0.8rem 1.5rem', borderRadius: '4px' }}>
+                <div
+                  className="hero-actions animate-fade-up"
+                  style={{ animationDelay: '0.4s' }}
+                  key={`acts-${idx}-${currentSlide}`}
+                >
+                  <Link
+                    to="/contact"
+                    className="btn btn-outline"
+                    style={{
+                      color: 'white',
+                      borderColor: 'white',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.8rem',
+                      padding: '0.8rem 1.5rem',
+                      borderRadius: '4px',
+                    }}
+                  >
                     Book your consultation <ArrowRight size={18} />
                   </Link>
                 </div>
@@ -404,9 +311,8 @@ const Home = () => {
                 <p className="about-desc text-muted">
                   Our dedicated team of designers works closely with you to understand your
                   vision and bring it to life with thoughtful attention to detail. Whether
-                  it's transforming a single room or an entire home.
+                  it&apos;s transforming a single room or an entire home.
                 </p>
-                {/* Checklist + Button on same row */}
                 <div className="about-cta-row">
                   <ul className="about-checklist">
                     <li>
@@ -424,33 +330,41 @@ const Home = () => {
                 </div>
               </div>
 
-              {/* Right – collage layout matching reference */}
+              {/* Right – collage */}
               <div className="about-visuals">
-
-                {/* Large image — top-left */}
                 <div className={`about-img-primary ${inView ? 'shine-active' : ''}`}>
-                  <img src="/images/home_about.jpeg" alt="Premium Kitchen Interior" />
+                  <img
+                    src="/images/home_about.jpeg"
+                    alt="Premium Kitchen Interior by Blue Craft"
+                    loading="lazy"
+                    width="600"
+                    height="400"
+                  />
                 </div>
-
-                {/* Smaller image — bottom-right */}
                 <div className={`about-img-secondary ${inView ? 'shine-active' : ''}`}>
-                  <img src="/images/home_about_secondary.jpeg" alt="Modern Exterior Design" />
+                  <img
+                    src="/images/home_about_secondary.jpeg"
+                    alt="Modern Interior Design by Blue Craft"
+                    loading="lazy"
+                    width="500"
+                    height="350"
+                  />
                 </div>
 
-                {/* 15+ circle badge — overlapping the two images */}
+                {/* 15+ badge */}
                 <div className={`experience-badge ${yearsReady ? 'badge-bounce' : ''}`}>
                   <span className="years">{yearsCount}+</span>
                   <span className="badge-label">Years Of<br />Experience</span>
                 </div>
 
-                {/* Right edge: vertical label + 95% ring */}
+                {/* 95% ring */}
                 <div className="stat-right-panel">
                   <span className="positive-feedback-text">Positive Feedback</span>
                   <div className="stat-ring-badge">
                     <svg viewBox="0 0 100 100" className="stat-ring-svg">
-                      <circle cx="50" cy="50" r="42" fill="none"
-                        stroke="rgba(25,35,36,0.15)" strokeWidth="7" />
-                      <circle cx="50" cy="50" r="42" fill="none"
+                      <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(25,35,36,0.15)" strokeWidth="7" />
+                      <circle
+                        cx="50" cy="50" r="42" fill="none"
                         stroke="var(--primary)" strokeWidth="7"
                         strokeLinecap="round"
                         strokeDasharray={CIRC}
@@ -462,7 +376,6 @@ const Home = () => {
                     <span className="stat-ring-num">{satisfCount}%</span>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -471,15 +384,10 @@ const Home = () => {
         {/* ── Key Advantages ── */}
         <section className="section key-advantages">
           <div className="container">
-
-            {/* Eyebrow + heading sit above the 2-column grid */}
             <span className="advantages-eyebrow">Why Choose Blue Craft In Bangalore</span>
             <h2 className="h2 advantages-heading">Our Key Advantages</h2>
 
-            {/* 2-column grid starts at the subtitle line */}
             <div className="advantages-layout">
-
-              {/* Left: subtitle + feature list */}
               <div className="advantages-left">
                 <p className="advantages-subtitle text-muted">
                   From concept to completion, discover how we bring your vision to life
@@ -490,23 +398,23 @@ const Home = () => {
                   {[
                     {
                       icon: LayoutDashboard, title: 'Innovative Design Options',
-                      desc: 'Blue Craft offers unique and innovative interior design solutions that are ready to go as well as completely customizable.'
+                      desc: 'Blue Craft offers unique and innovative interior design solutions that are ready to go as well as completely customizable.',
                     },
                     {
                       icon: Eye, title: 'Material Transparency',
-                      desc: "We provide full transparency throughout our process so you know exactly what you're paying for."
+                      desc: "We provide full transparency throughout our process so you know exactly what you're paying for.",
                     },
                     {
                       icon: Tag, title: 'Reasonable Price',
-                      desc: 'If you need the best home interior price in Bangalore, Blue Craft offers competitive rates without compromise.'
+                      desc: 'If you need the best home interior price in Bangalore, Blue Craft offers competitive rates without compromise.',
                     },
                     {
                       icon: Layers, title: 'End-To-End Service',
-                      desc: 'From initial design through final installation, we handle every step of your projects across Bangalore and nighbouring states'
+                      desc: 'From initial design through final installation, we handle every step of your projects across Bangalore and neighbouring states.',
                     },
                     {
                       icon: Award, title: 'Assured Quality',
-                      desc: "Whether it's a 2BHK or a 4BHK, we deliver top-notch workmanship guaranteed to impress."
+                      desc: "Whether it's a 2BHK or a 4BHK, we deliver top-notch workmanship guaranteed to impress.",
                     },
                   ].map((adv, idx) => (
                     <div key={idx} className="advantage-item">
@@ -525,16 +433,33 @@ const Home = () => {
               {/* Right: asymmetric image layout */}
               <div className="advantages-images">
                 <div className="adv-img-card">
-                  <img src="/images/adv_img1.jpeg" alt="Elegant Foyer Design" />
+                  <img
+                    src="/images/adv_img1.jpeg"
+                    alt="Elegant Foyer Design by Blue Craft"
+                    loading="lazy"
+                    width="400"
+                    height="600"
+                  />
                 </div>
                 <div className="adv-img-card">
-                  <img src="/images/adv_img2.jpeg" alt="Modern TV Unit" />
+                  <img
+                    src="/images/adv_img2.jpeg"
+                    alt="Modern TV Unit Design"
+                    loading="lazy"
+                    width="400"
+                    height="300"
+                  />
                 </div>
                 <div className="adv-img-card">
-                  <img src="/images/adv_img3.jpeg" alt="Designer Living Room" />
+                  <img
+                    src="/images/adv_img3.jpeg"
+                    alt="Designer Living Room Interior"
+                    loading="lazy"
+                    width="400"
+                    height="300"
+                  />
                 </div>
               </div>
-
             </div>
           </div>
         </section>
@@ -542,8 +467,6 @@ const Home = () => {
         {/* ── Projects Showcase ── */}
         <section className="section projects-showcase">
           <div className="container">
-
-            {/* Header row */}
             <div className="projects-header">
               <div>
                 <span className="projects-eyebrow">Projects</span>
@@ -554,10 +477,10 @@ const Home = () => {
               </Link>
             </div>
 
-            {/* Marquee slider — seamless infinite scroll */}
+            {/* Infinite marquee slider */}
             <div className="projects-marquee-wrap">
               <div className="projects-marquee-track">
-                {[...PROJECTS, ...PROJECTS].map((p, idx) => (
+                {[...PROJECTS_DATA, ...PROJECTS_DATA].map((p, idx) => (
                   <div
                     key={idx}
                     className="proj-card"
@@ -568,7 +491,13 @@ const Home = () => {
                     aria-label={`Open gallery for ${p.title}`}
                   >
                     <div className="proj-img-wrap">
-                      <img src={p.images[0]} alt={p.title} />
+                      <img
+                        src={p.images[0]}
+                        alt={`${p.title} interior design by Blue Craft`}
+                        loading="lazy"
+                        width="280"
+                        height="373"
+                      />
                       <div className="proj-overlay">
                         <span className="proj-view-label">View Gallery</span>
                       </div>
@@ -581,7 +510,6 @@ const Home = () => {
                 ))}
               </div>
             </div>
-
           </div>
         </section>
 
@@ -606,7 +534,7 @@ const Home = () => {
                 { num: '01', title: 'Book Your Order', desc: 'Fill up our contact form and we will get right back to you.' },
                 { num: '02', title: 'Design Starts', desc: 'We learn your preferences and provide a detailed cost estimation.' },
                 { num: '03', title: 'Execution Phase', desc: 'Your dream interiors begin to take shape under our expert team.' },
-                { num: '04', title: 'Installation Phase', desc: 'We handle delivery and installation - everything is turnkey.' }
+                { num: '04', title: 'Installation Phase', desc: 'We handle delivery and installation - everything is turnkey.' },
               ].map((step, idx) => (
                 <div
                   key={idx}
@@ -621,7 +549,10 @@ const Home = () => {
                 </div>
               ))}
             </div>
-            <div className="text-center text-accent font-semibold" style={{ fontSize: '1.875rem', letterSpacing: '2px', marginTop: '5rem' }}>
+            <div
+              className="text-center text-accent font-semibold"
+              style={{ fontSize: '1.875rem', letterSpacing: '2px', marginTop: '5rem' }}
+            >
               <ScrollTypewriterText text="---NOW YOU'RE READY TO MOVE IN---" />
             </div>
           </div>
@@ -639,7 +570,13 @@ const Home = () => {
                 {[...TESTIMONIALS, ...TESTIMONIALS].map((t, idx) => (
                   <div key={idx} className="testimonial-card">
                     <div className="testi-avatar">
-                      <img src={t.img} alt={t.name} />
+                      <img
+                        src={t.img}
+                        alt={`${t.name} — Blue Craft customer`}
+                        loading="lazy"
+                        width="95"
+                        height="95"
+                      />
                     </div>
                     <h3 className="testi-name">{t.name}</h3>
                     <p className="testi-location">{t.location}</p>
@@ -648,7 +585,7 @@ const Home = () => {
                         <Star key={i} size={14} className="star-icon" fill="currentColor" strokeWidth={0} />
                       ))}
                     </div>
-                    <p className="testi-text text-muted">“{t.text}”</p>
+                    <p className="testi-text text-muted">&ldquo;{t.text}&rdquo;</p>
                   </div>
                 ))}
               </div>
@@ -657,8 +594,6 @@ const Home = () => {
         </section>
 
       </PageContainer>
-
-
     </>
   );
 };
