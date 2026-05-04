@@ -212,7 +212,7 @@ const TESTIMONIALS = [
   {
     name: 'Shambhuprasad - Geethika',
     location: 'Bangalore',
-    img: '/images/home_about.jpeg',
+    img: '/images/Testimonials/Shambhuprasad - Geethika.jpeg',
     rating: 5,
     text: "Wonderful decision, amazing work delivered.",
   },
@@ -238,16 +238,16 @@ const TESTIMONIALS = [
     text: "Wonderful decision, amazing work delivered.",
   },
   {
-    name: 'Vikram - Anjali',
+    name: 'Mahesh - Bhargavi',
     location: 'Bangalore',
-    img: '/images/project1.png',
+    img: '/images/Testimonials/Mahesh - Bhargavi.jpeg',
     rating: 5,
     text: "Very professional team. The best interior designers in Bangalore!",
   },
   {
-    name: 'Arjun - Neha',
+    name: 'Karthik - Yesswini',
     location: 'Bangalore',
-    img: '/images/project2.png',
+    img: '/images/Testimonials/Karthik - Yesswini.jpeg',
     rating: 5,
     text: "They utilized our space so efficiently without making it feel cluttered.",
   }
@@ -357,8 +357,8 @@ const Home = () => {
                 )}
                 <div className="hero-actions animate-fade-up" style={{ animationDelay: '0.4s' }} key={`acts-${idx}-${currentSlide}`}>
                   <Link to="/contact" className="btn btn-outline" style={{ color: 'white', borderColor: 'white', display: 'inline-flex', alignItems: 'center', gap: '0.8rem', padding: '0.8rem 1.5rem', borderRadius: '4px' }}>
-                  Book your consultation <ArrowRight size={18} />
-                </Link>
+                    Book your consultation <ArrowRight size={18} />
+                  </Link>
                 </div>
               </div>
             </div>

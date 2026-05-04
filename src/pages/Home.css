@@ -826,18 +826,24 @@
 }
 
 .testi-avatar {
-  width: 90px;
-  height: 90px;
+  width: 95px;
+  height: 95px;
   border-radius: 50%;
   overflow: hidden;
   margin-bottom: 1.2rem;
-  /* Removed border and heavy shadow to match flat circular look */
+  background-color: #f4f6f5; /* background color to blend edges smoothly */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .testi-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 20%; /* Adjust to prioritize faces (top-center) */
+  transform: scale(0.85); /* Slightly scale down to reduce aggressive cropping */
+  border-radius: 50%; /* Maintain perfect circular shape */
 }
 
 .testi-name {
