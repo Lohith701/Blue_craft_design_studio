@@ -67,17 +67,17 @@ const ScrollTypewriterText = ({ text }) => {
 const HERO_SLIDES = [
   {
     image: '/images/h1.png',
-    title: 'Designing Spaces.\nElevating Lifestyles.',
-    desc: 'Thoughtful design. Timeless spaces.\nCrafted for the way you live.',
+    title: "Bengaluru's Most Trusted\nInterior Design Studio.",
+    desc: 'Award-winning interiors. Transparent pricing.\nDelivered on time, every time.',
   },
   {
     image: '/images/img1.jpeg',
-    title: 'We bring your vision into reality',
+    title: 'Your Dream Home, Designed & Built by Experts',
     desc: '',
   },
   {
     image: '/images/img2.png',
-    title: 'We create spaces where families actually want to spend time together',
+    title: 'Spaces That Tell Your Story — From Concept to Move-In',
     desc: '',
   },
 ];
@@ -208,8 +208,8 @@ const Home = () => {
   return (
     <>
       <PageContainer
-        title="Home"
-        description="Blue Craft Design Studio offers bespoke designs that elevate your home and lifestyle. Timeless, functional interiors crafted for the way you live."
+        title="Interior Design Company Bengaluru | Blue Craft"
+        description="Blue Craft Design Studio — Bengaluru's trusted interior design company. Premium home interiors, modular kitchens & full turnkey solutions. Get a free consultation today."
       >
         {/* ── Hero ── */}
         <section className="hero">
@@ -264,7 +264,7 @@ const Home = () => {
                       borderRadius: '4px',
                     }}
                   >
-                    Book your consultation <ArrowRight size={18} />
+                    Book a Free Consultation <ArrowRight size={18} />
                   </Link>
                 </div>
               </div>
@@ -306,26 +306,27 @@ const Home = () => {
 
               {/* Left – text */}
               <div className="about-text">
-                <span className="about-eyebrow">About Blue Craft</span>
-                <h2 className="h2 about-heading">Our passion for design, your vision realized</h2>
+                <span className="about-eyebrow">Bengaluru&apos;s Interior Design Experts</span>
+                <h2 className="h2 about-heading">Where Your Vision Meets 15 Years of Expertise</h2>
                 <p className="about-desc text-muted">
-                  Our dedicated team of designers works closely with you to understand your
-                  vision and bring it to life with thoughtful attention to detail. Whether
-                  it&apos;s transforming a single room or an entire home.
+                  Blue Craft Design Studio is one of Bengaluru&apos;s leading interior design companies,
+                  with over 500 completed homes across HSR Layout, Whitefield, Indiranagar, and beyond.
+                  We pair award-winning design sensibility with complete project transparency — so you
+                  always know what you&apos;re getting, and what you&apos;re paying for.
                 </p>
                 <div className="about-cta-row">
                   <ul className="about-checklist">
                     <li>
                       <CheckCircle2 className="text-accent" size={20} />
-                      <span>Creative Expertise</span>
+                      <span>500+ Homes Delivered in Bangalore</span>
                     </li>
                     <li>
                       <CheckCircle2 className="text-accent" size={20} />
-                      <span>Client-Centered Approach</span>
+                      <span>Full Turnkey, Zero Surprises</span>
                     </li>
                   </ul>
                   <Link to="/about" className="btn btn-primary btn-pill">
-                    Read More <ArrowRight size={16} />
+                    Our Story <ArrowRight size={16} />
                   </Link>
                 </div>
               </div>
@@ -384,37 +385,38 @@ const Home = () => {
         {/* ── Key Advantages ── */}
         <section className="section key-advantages">
           <div className="container">
-            <span className="advantages-eyebrow">Why Choose Blue Craft In Bangalore</span>
-            <h2 className="h2 advantages-heading">Our Key Advantages</h2>
+            <span className="advantages-eyebrow">Why Bangalore Homeowners Choose Us</span>
+            <h2 className="h2 advantages-heading">The Blue Craft Difference</h2>
 
             <div className="advantages-layout">
               <div className="advantages-left">
                 <p className="advantages-subtitle text-muted">
-                  From concept to completion, discover how we bring your vision to life
-                  with innovation, collaboration, and expert craftsmanship.
+                  In a city full of options, Bengaluru homeowners keep coming back to Blue Craft
+                  for one reason: we treat your home as if it were our own. Every decision — from
+                  material selection to final installation — is made with your lifestyle in mind.
                 </p>
 
                 <div className="advantages-list">
                   {[
                     {
-                      icon: LayoutDashboard, title: 'Innovative Design Options',
-                      desc: 'Blue Craft offers unique and innovative interior design solutions that are ready to go as well as completely customizable.',
+                      icon: LayoutDashboard, title: 'Tailored, Not Templated',
+                      desc: 'Every home we design in Bengaluru is built around your lifestyle — not a catalogue. Custom layouts, finishes, and furniture that are uniquely yours.',
                     },
                     {
-                      icon: Eye, title: 'Material Transparency',
-                      desc: "We provide full transparency throughout our process so you know exactly what you're paying for.",
+                      icon: Eye, title: 'Complete Cost Transparency',
+                      desc: 'No hidden charges. No last-minute surprises. You receive a detailed, itemised quote before a single nail goes in — and we stick to it.',
                     },
                     {
-                      icon: Tag, title: 'Reasonable Price',
-                      desc: 'If you need the best home interior price in Bangalore, Blue Craft offers competitive rates without compromise.',
+                      icon: Tag, title: 'Competitive Bangalore Pricing',
+                      desc: 'Premium home interiors in Bangalore should not break the bank. Our modular solutions deliver luxury results at pricing that respects your budget.',
                     },
                     {
-                      icon: Layers, title: 'End-To-End Service',
-                      desc: 'From initial design through final installation, we handle every step of your projects across Bangalore and neighbouring states.',
+                      icon: Layers, title: 'Turnkey Execution',
+                      desc: 'From concept drawings to final handover, our in-house team manages design, procurement, fabrication, and installation — all under one roof.',
                     },
                     {
-                      icon: Award, title: 'Assured Quality',
-                      desc: "Whether it's a 2BHK or a 4BHK, we deliver top-notch workmanship guaranteed to impress.",
+                      icon: Award, title: 'Certified Quality Assurance',
+                      desc: '10-year warranty on all modular work. Every project is inspected at multiple stages so the finish you see on day one lasts a decade.',
                     },
                   ].map((adv, idx) => (
                     <div key={idx} className="advantage-item">
@@ -469,11 +471,11 @@ const Home = () => {
           <div className="container">
             <div className="projects-header">
               <div>
-                <span className="projects-eyebrow">Projects</span>
-                <h2 className="h2 projects-heading">Featured Projects</h2>
+                <span className="projects-eyebrow">Our Portfolio</span>
+                <h2 className="h2 projects-heading">Homes We&apos;ve Transformed Across Bengaluru</h2>
               </div>
               <Link to="/projects" className="btn btn-outline gap-2">
-                View All Projects <ArrowRight size={18} />
+                Explore All Projects <ArrowRight size={18} />
               </Link>
             </div>
 
@@ -522,19 +524,20 @@ const Home = () => {
         <section className="section bg-secondary process-section">
           <div className="container">
             <div className="text-center mb-14">
-              <span className="process-label">How It Works</span>
-              <h2 className="h2 mb-4">Relax&mdash;We&apos;ve Got It Covered</h2>
+              <span className="process-label">Our Process</span>
+              <h2 className="h2 mb-4">From First Call to Move-In&nbsp;&mdash; We Handle Everything</h2>
               <p className="text-muted max-w-2xl mx-auto" style={{ marginTop: '1rem', marginBottom: '1rem' }}>
-                Our comprehensive approach guides you through each phase of the design process,
-                from initial brainstorming to final installation.
+                Getting your Bangalore home designed should feel exciting, not overwhelming.
+                Our four-step process is built to keep you informed, in control, and genuinely
+                delighted at every milestone.
               </p>
             </div>
             <div className="grid grid-cols-4 gap-6 process-steps" ref={processRef}>
               {[
-                { num: '01', title: 'Book Your Order', desc: 'Fill up our contact form and we will get right back to you.' },
-                { num: '02', title: 'Design Starts', desc: 'We learn your preferences and provide a detailed cost estimation.' },
-                { num: '03', title: 'Execution Phase', desc: 'Your dream interiors begin to take shape under our expert team.' },
-                { num: '04', title: 'Installation Phase', desc: 'We handle delivery and installation - everything is turnkey.' },
+                { num: '01', title: 'Free Consultation', desc: 'Book a call or site visit — no charges, no obligations. We listen, understand your space, and map out a vision together.' },
+                { num: '02', title: 'Design & Estimation', desc: 'Our designers craft a personalised 3D layout and provide a detailed, transparent cost estimate within 48 hours.' },
+                { num: '03', title: 'Skilled Execution', desc: 'Our in-house craftsmen bring the design to life with precision, using quality-verified materials and regular progress updates.' },
+                { num: '04', title: 'Handover & Support', desc: 'We do a thorough quality walkthrough with you before handover, and stay available post-installation for any support.' },
               ].map((step, idx) => (
                 <div
                   key={idx}
@@ -553,7 +556,7 @@ const Home = () => {
               className="text-center text-accent font-semibold"
               style={{ fontSize: '1.875rem', letterSpacing: '2px', marginTop: '5rem' }}
             >
-              <ScrollTypewriterText text="---NOW YOU'RE READY TO MOVE IN---" />
+              <ScrollTypewriterText text="--- YOUR DREAM HOME IS READY TO MOVE IN ---" />
             </div>
           </div>
         </section>
@@ -562,7 +565,7 @@ const Home = () => {
         <section className="section testimonials-section">
           <div className="container">
             <div className="text-center mb-12">
-              <h2 className="h2" style={{ marginBottom: '0' }}>What Our Customers Say</h2>
+              <h2 className="h2" style={{ marginBottom: '0' }}>What Bangalore Homeowners Say About Us</h2>
             </div>
 
             <div className="projects-marquee-wrap">
