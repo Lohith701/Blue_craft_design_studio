@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 const SITE_NAME  = 'Blue Craft Design Studio';
 const SITE_URL   = 'https://bluecraftdesignstudio.com';
-const OG_IMAGE   = `${SITE_URL}/images/FINAL_LOGO.png`;
+const OG_IMAGE   = `${SITE_URL}/images/FINAL_LOGO.webp`;
 const OG_DEFAULT_DESC = 'Premium bespoke interior design and property services in Bangalore.';
 
 const PageContainer = ({ title, description, children }) => {
@@ -33,7 +33,7 @@ const PageContainer = ({ title, description, children }) => {
         <meta name="twitter:description" content={metaDesc} />
         <meta name="twitter:image"       content={OG_IMAGE} />
       </Helmet>
-      <div className="page-wrapper animate-fade-up">
+      <div className="page-wrapper">
         {children}
       </div>
     </>

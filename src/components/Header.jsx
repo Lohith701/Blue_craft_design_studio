@@ -29,7 +29,7 @@ const Header = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     // Run once on mount so initial state is correct
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
@@ -67,7 +67,15 @@ const Header = () => {
         <div className="container header-container">
           {/* Logo */}
           <Link to="/" className="logo">
-            <img src="/images/FINAL_LOGO.png" alt="Blue Craft Logo" className="logo-img" />
+            <img
+              src="/images/FINAL_LOGO.webp"
+              alt="Blue Craft Design Studio - Interior Designers in Bengaluru"
+              className="logo-img"
+              width="45"
+              height="45"
+              decoding="async"
+              fetchpriority="high"
+            />
             <div className="logo-text">
               <h2>Blue Craft</h2>
               <span>Design Studio</span>
@@ -115,7 +123,14 @@ const Header = () => {
 
         {/* Decorative brand mark */}
         <div className="mobile-menu-brand">
-          <img src="/images/FINAL_LOGO.png" alt="Blue Craft Logo" className="mobile-menu-logo" />
+          <img
+              src="/images/FINAL_LOGO.webp"
+              alt="Blue Craft Design Studio - Interior Designers in Bengaluru"
+              className="mobile-menu-logo"
+              width="40"
+              height="40"
+              decoding="async"
+            />
           <span>Blue Craft Design Studio</span>
         </div>
 

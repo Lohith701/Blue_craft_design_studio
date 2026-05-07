@@ -28,7 +28,7 @@ const Projects = () => {
         eyebrow="Interior Design Services Near Me — Bangalore"
         title="Our Projects"
         subtitle="500+ homes transformed across Bangalore. Browse real work, real spaces, real results."
-        bgImage="/images/hero-banner/projects-banner.jpeg"
+        bgImage="/images/hero-banner/projects-banner.webp"
       />
 
       <section className="section bg-secondary min-h-screen">

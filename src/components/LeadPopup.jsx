@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 import './LeadPopup.css';
 
-const LS_SUBMITTED = 'bcd_lead_submitted'; // localStorage — persists forever
-const SS_CLOSED    = 'bcd_lead_closed';    // sessionStorage — resets each session
+const INTERVAL_MS = 20000; // 20 seconds
 
 const LeadPopup = () => {
   const [isOpen, setIsOpen]           = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const timerRef = useRef(null);
+
+  const scheduleNext = () => {
+    // Clear any existing timer before scheduling a new one
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => setIsOpen(true), INTERVAL_MS);
+  };
 
   useEffect(() => {
-    // 1. User already submitted before (any previous session) — never show again
-    if (localStorage.getItem(LS_SUBMITTED)) return;
-
-    // 2. User already closed popup this session without submitting — skip
-    if (sessionStorage.getItem(SS_CLOSED)) return;
-
-    // 3. Schedule a single popup appearance after 20 seconds
-    const timer = setTimeout(() => setIsOpen(true), 20000);
-
-    // Cleanup on unmount — prevents memory leak / stale timer
-    return () => clearTimeout(timer);
-  }, []); // Runs once on mount; React Router remounts this on each navigation
+    // Show popup 20 seconds after mount
+    scheduleNext();
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleClose = () => {
-    // Dismiss for this session only (not permanently)
-    sessionStorage.setItem(SS_CLOSED, '1');
     setIsOpen(false);
+    // Re-schedule for another 20 seconds from now
+    scheduleNext();
   };
 
   const handleSubmit = async (e) => {
@@ -37,17 +37,22 @@ const LeadPopup = () => {
     formData.set('Phone', '+91 ' + formData.get('Phone'));
 
     try {
-      await fetch('https://formsubmit.co/ajax/Sales@bluecraftdesignstudio.com', {
+      const response = await fetch('https://formsubmit.co/ajax/Sales@bluecraftdesignstudio.com', {
         method: 'POST',
         body: formData,
         headers: { Accept: 'application/json' },
       });
 
-      // Permanently suppress popup — user submitted, never ask again
-      localStorage.setItem(LS_SUBMITTED, 'true');
+      if (!response.ok) {
+        throw new Error('Submission failed');
+      }
+
       setIsOpen(false);
       alert('Thank you! We will get back to you shortly.');
       e.target.reset();
+
+      // Reappear again after 20 seconds even after successful submission
+      scheduleNext();
     } catch {
       alert('There was an error submitting. Please try again.');
     } finally {

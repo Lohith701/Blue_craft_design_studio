@@ -1,13 +1,113 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blue Craft Design Studio</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="icon" type="image/png" href="/images/FINAL_LOGO.webp" />
+  <title>Blue Craft Design Studio | Premium Interior Designers in Bengaluru</title>
+  <meta name="description" content="Blue Craft Design Studio — Bengaluru's trusted premium interior design company. We specialize in luxury home interiors, modular kitchens, and full turnkey solutions." />
+  
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blue Craft Design Studio | Interior Designers Bengaluru" />
+  <meta property="og:description" content="Bengaluru's trusted premium interior design company. We specialize in luxury home interiors and turnkey solutions." />
+  <meta property="og:image" content="https://bluecraftdesignstudio.com/images/FINAL_LOGO.webp" />
+  <meta property="og:url" content="https://bluecraftdesignstudio.com" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Blue Craft Design Studio",
+    "image": "https://bluecraftdesignstudio.com/images/FINAL_LOGO.webp",
+    "@id": "https://bluecraftdesignstudio.com",
+    "url": "https://bluecraftdesignstudio.com",
+    "telephone": "+919886933999",
+    "email": "Sales@bluecraftdesignstudio.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "club circle 754/1, 19th main, 22nd Cross Rd, Sector 2, HSR Layout",
+      "addressLocality": "Bengaluru",
+      "addressRegion": "Karnataka",
+      "postalCode": "560102",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 12.9081,
+      "longitude": 77.6476
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "sameAs": [
+      "https://www.facebook.com/bluecraftdesignstudio/",
+      "https://www.instagram.com/blue_craft_design_studio/",
+      "https://x.com/BlueCraft9999",
+      "https://www.linkedin.com/company/blue-craft-design-studio/"
+    ]
+  }
+  </script>
+
+  <!-- DNS prefetch: resolves form-submission host early, costs nothing -->
+  <link rel="dns-prefetch" href="https://formsubmit.co" />
+
+  <!--
+    Preload LCP hero image (slide 0 = h1.webp).
+    Browser fetches this before JS/CSS finish parsing → faster FCP & LCP.
+    fetchpriority="high" ensures it wins over lower-priority requests.
+  -->
+  <link
+    rel="preload"
+    as="image"
+    href="/images/h1-mobile.webp"
+    media="(max-width: 768px)"
+    fetchpriority="high"
+  />
+  <link
+    rel="preload"
+    as="image"
+    href="/images/h1.webp"
+    media="(min-width: 769px)"
+    fetchpriority="high"
+  />
+
+  <!--
+    Non-blocking Google Fonts:
+    · preconnect warms up the DNS + TLS handshake
+    · media="print" + onload trick loads CSS asynchronously (no render block)
+    · <noscript> fallback for JS-disabled browsers
+    This replaces the render-blocking @import in index.css.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap"
+    media="print"
+    onload="this.media='all'"
+  />
+  <noscript>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap"
+    />
+  </noscript>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

@@ -9,22 +9,22 @@ const Trending = () => {
     {
       title: 'Biophilic Design',
       desc: 'Integrating natural elements into interiors to improve well-being and connectivity to nature.',
-      img: '/images/img1.jpeg'
+      img: '/images/img1.webp'
     },
     {
       title: 'Warm Minimalism',
       desc: 'A softer take on minimalism using textured fabrics, warm wood tones, and organic shapes.',
-      img: '/images/img2.png'
+      img: '/images/img2.webp'
     },
     {
       title: 'Smart Spaces',
       desc: 'Tech-integrated furniture and lighting solutions that adapt to your daily routines.',
-      img: '/images/hero.jpeg'
+      img: '/images/hero.webp'
     },
     {
       title: 'Sustainable Luxury',
       desc: 'Premium designs crafted from recycled materials and eco-friendly manufacturing processes.',
-      img: '/images/project1.png'
+      img: '/images/project1.webp'
     }
   ];
 
@@ -37,7 +37,7 @@ const Trending = () => {
         eyebrow="What's New"
         title="Trending"
         subtitle="Stay ahead with the latest interior design trends and innovations."
-        bgImage="/images/hero-banner/trending-banner.jpeg"
+        bgImage="/images/hero-banner/trending-banner.webp"
       />
 
       <section className="section">

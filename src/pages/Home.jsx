@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import PageContainer from '../components/PageContainer';
 import ProjectModal from '../components/ProjectModal';
@@ -66,63 +66,74 @@ const ScrollTypewriterText = ({ text }) => {
 /* ── Hero Slides ── */
 const HERO_SLIDES = [
   {
-    image: '/images/h1.png',
+    image: '/images/h1.webp',
     title: "Bengaluru's Most Trusted\nInterior Design Studio.",
     desc: 'Award-winning interiors. Transparent pricing.\nDelivered on time, every time.',
   },
   {
-    image: '/images/img1.jpeg',
+    image: '/images/img1.webp',
     title: 'Your Dream Home, Designed & Built by Experts',
     desc: '',
   },
   {
-    image: '/images/img2.png',
+    image: '/images/img2.webp',
     title: 'Spaces That Tell Your Story — From Concept to Move-In',
     desc: '',
   },
 ];
+
+/*
+  Particles: computed once at module level (stable reference).
+  If inside the component, Math.random() runs on EVERY re-render
+  (slider ticks every 5 s) creating 10 new objects each time.
+*/
+const HERO_PARTICLES = Array.from({ length: 10 }).map(() => ({
+  left:     `${Math.random() * 100}%`,
+  duration: `${6.5 + Math.random() * 3}s`,
+  delay:    `${Math.random() * 4.6}s`,
+}));
 
 /* ── Testimonial data ── */
 const TESTIMONIALS = [
   {
     name: 'Shambhuprasad - Geethika',
     location: 'Bangalore',
-    img: '/images/Testimonials/Shambhuprasad - Geethika.jpeg',
+    img: '/images/Testimonials/Shambhuprasad - Geethika.webp',
     rating: 5,
     text: 'Wonderful decision, amazing work delivered.',
   },
   {
     name: 'Mohan - Jyothi',
     location: 'Bangalore',
-    img: '/images/Testimonials/Mohan-Jyothi.jpeg',
+    img: '/images/Testimonials/Mohan-Jyothi.webp',
     rating: 5,
     text: 'High-quality work and timely responses.',
   },
   {
     name: 'Venki - Devi',
     location: 'Bangalore',
-    img: '/images/Testimonials/venki-Devi.jpeg',
+    img: '/images/Testimonials/venki-Devi.webp',
     rating: 5,
     text: 'Great design options and smooth experience.',
   },
   {
     name: 'Dhamodhar - Navaneetha',
     location: 'Bangalore',
-    img: '/images/Testimonials/Dhamodhar-Navaneetha.jpeg',
+    img: '/images/Testimonials/Dhamodhar-Navaneetha.webp',
     rating: 5,
     text: 'Wonderful decision, amazing work delivered.',
   },
   {
     name: 'Mahesh - Bhargavi',
     location: 'Bangalore',
-    img: '/images/Testimonials/Mahesh - Bhargavi.jpeg',
+    img: '/images/Testimonials/Mahesh - Bhargavi.webp',
     rating: 5,
     text: 'Very professional team. The best interior designers in Bangalore!',
   },
   {
     name: 'Karthik - Yesswini',
     location: 'Bangalore',
-    img: '/images/Testimonials/Karthik - Yesswini.jpeg',
+    img: '/images/Testimonials/Karthik - Yesswini.webp',
     rating: 5,
     text: 'They utilized our space so efficiently without making it feel cluttered.',
   },
@@ -155,6 +166,13 @@ const Home = () => {
 
   const openModal  = useCallback((project) => setActiveProject(project), []);
   const closeModal = useCallback(() => setActiveProject(null), []);
+
+  /*
+    Doubled arrays for infinite marquee — memoized so they aren't
+    re-allocated every 5 s when the hero slider interval fires a re-render.
+  */
+  const doubledProjects      = useMemo(() => [...PROJECTS_DATA, ...PROJECTS_DATA], []);
+  const doubledTestimonials  = useMemo(() => [...TESTIMONIALS, ...TESTIMONIALS], []);
 
   /* ── Hero auto-advance ── */
   useEffect(() => {
@@ -222,21 +240,30 @@ const Home = () => {
                 Slide 0: fetchpriority="high" (LCP image — load immediately)
                 Slide 1+: loading="lazy" (only loaded when needed)
               */}
-              <img
-                src={slide.image}
-                alt={slide.title.replace(/\n/g, ' ')}
-                className="hero-slide-img"
-                fetchpriority={idx === 0 ? 'high' : 'low'}
-                loading={idx === 0 ? 'eager' : 'lazy'}
-                width="1920"
-                height="1080"
-                decoding={idx === 0 ? 'sync' : 'async'}
-              />
+              <picture>
+                <source media="(max-width: 768px)" srcSet={slide.image.replace('.webp', '-mobile.webp')} />
+                <img
+                  src={slide.image}
+                  alt={slide.title.replace(/\n/g, ' ')}
+                  className="hero-slide-img"
+                  fetchpriority={idx === 0 ? 'high' : 'low'}
+                  loading={idx === 0 ? 'eager' : 'lazy'}
+                  width="1920"
+                  height="1080"
+                  decoding={idx === 0 ? 'sync' : 'async'}
+                />
+              </picture>
               <div className="hero-overlay" />
               <div className="container hero-content">
-                <h1 className="animate-fade-up" key={`h1-${idx}-${currentSlide}`}>
-                  <TypewriterText text={slide.title} isActive={idx === currentSlide} />
-                </h1>
+                {idx === 0 ? (
+                  <h1 className="animate-fade-up" key={`h1-${idx}-${currentSlide}`}>
+                    <TypewriterText text={slide.title} isActive={idx === currentSlide} />
+                  </h1>
+                ) : (
+                  <h2 className="animate-fade-up h1" key={`h2-${idx}-${currentSlide}`}>
+                    <TypewriterText text={slide.title} isActive={idx === currentSlide} />
+                  </h2>
+                )}
                 {slide.desc && (
                   <p
                     className="animate-fade-up"
@@ -335,7 +362,7 @@ const Home = () => {
               <div className="about-visuals">
                 <div className={`about-img-primary ${inView ? 'shine-active' : ''}`}>
                   <img
-                    src="/images/home_about.jpeg"
+                    src="/images/home_about.webp"
                     alt="Premium Kitchen Interior by Blue Craft"
                     loading="lazy"
                     width="600"
@@ -344,7 +371,7 @@ const Home = () => {
                 </div>
                 <div className={`about-img-secondary ${inView ? 'shine-active' : ''}`}>
                   <img
-                    src="/images/home_about_secondary.jpeg"
+                    src="/images/home_about_secondary.webp"
                     alt="Modern Interior Design by Blue Craft"
                     loading="lazy"
                     width="500"
@@ -436,7 +463,7 @@ const Home = () => {
               <div className="advantages-images">
                 <div className="adv-img-card">
                   <img
-                    src="/images/adv_img1.jpeg"
+                    src="/images/adv_img1.webp"
                     alt="Elegant Foyer Design by Blue Craft"
                     loading="lazy"
                     width="400"
@@ -445,7 +472,7 @@ const Home = () => {
                 </div>
                 <div className="adv-img-card">
                   <img
-                    src="/images/adv_img2.jpeg"
+                    src="/images/adv_img2.webp"
                     alt="Modern TV Unit Design"
                     loading="lazy"
                     width="400"
@@ -454,7 +481,7 @@ const Home = () => {
                 </div>
                 <div className="adv-img-card">
                   <img
-                    src="/images/adv_img3.jpeg"
+                    src="/images/adv_img3.webp"
                     alt="Designer Living Room Interior"
                     loading="lazy"
                     width="400"
@@ -482,7 +509,7 @@ const Home = () => {
             {/* Infinite marquee slider */}
             <div className="projects-marquee-wrap">
               <div className="projects-marquee-track">
-                {[...PROJECTS_DATA, ...PROJECTS_DATA].map((p, idx) => (
+                {doubledProjects.map((p, idx) => (
                   <div
                     key={idx}
                     className="proj-card"
@@ -570,7 +597,7 @@ const Home = () => {
 
             <div className="projects-marquee-wrap">
               <div className="projects-marquee-track testimonial-track">
-                {[...TESTIMONIALS, ...TESTIMONIALS].map((t, idx) => (
+                {doubledTestimonials.map((t, idx) => (
                   <div key={idx} className="testimonial-card">
                     <div className="testi-avatar">
                       <img

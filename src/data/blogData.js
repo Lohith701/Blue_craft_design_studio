@@ -165,7 +165,7 @@ export const BLOGS = [
     date: 'Apr 24, 2026',
     author: 'Blue Craft Team',
     category: 'Modular Interiors',
-    image: '/images/shutters.jpeg',
+    image: '/images/shutters.webp',
     body: BODY_1,
   },
   {
@@ -175,7 +175,7 @@ export const BLOGS = [
     date: 'Apr 20, 2026',
     author: 'Blue Craft Team',
     category: 'Home Renovation',
-    image: '/images/material.jpeg',
+    image: '/images/material.webp',
     body: BODY_2,
   },
   {
@@ -185,7 +185,7 @@ export const BLOGS = [
     date: 'Apr 16, 2026',
     author: 'Blue Craft Team',
     category: 'Biophilic & Wellness',
-    image: '/images/vastu.jpeg',
+    image: '/images/vastu.webp',
     body: BODY_3,
   },
   {
@@ -195,7 +195,7 @@ export const BLOGS = [
     date: 'Apr 10, 2026',
     author: 'Blue Craft Team',
     category: 'Modular Interior Design',
-    image: '/images/furniture.jpeg',
+    image: '/images/furniture.webp',
     body: BODY_4,
   },
   {
@@ -205,7 +205,7 @@ export const BLOGS = [
     date: 'Apr 5, 2026',
     author: 'Blue Craft Team',
     category: 'Design Trends',
-    image: '/images/flexiable.jpeg',
+    image: '/images/flexiable.webp',
     body: BODY_5,
   },
 ];

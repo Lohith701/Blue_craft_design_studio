@@ -1,25 +1,32 @@
 import React from 'react';
 import './HeroBanner.css';
 
-const HeroBanner = ({ eyebrow, title, subtitle, bgImage }) => {
-  // Generate 10 particles with specific requirements
-  const particles = Array.from({ length: 10 }).map((_, i) => ({
-    left: `${Math.random() * 100}%`,
-    duration: `${6.5 + Math.random() * 3}s`, // 6.5s–9.5s
-    delay: `${Math.random() * 4.6}s`, // 0s–4.6s
-  }));
+// Generate particles once outside component to prevent re-renders
+const PARTICLES = Array.from({ length: 10 }).map(() => ({
+  left: `${Math.random() * 100}%`,
+  duration: `${6.5 + Math.random() * 3}s`,
+  delay: `${Math.random() * 4.6}s`,
+}));
 
+const HeroBanner = ({ eyebrow, title, subtitle, bgImage }) => {
   return (
     <div className="hero-banner">
-      <div 
-        className="bg" 
-        style={{ backgroundImage: `url(${bgImage})` }}
-      ></div>
+      <picture>
+        <source media="(max-width: 768px)" srcSet={bgImage.replace('.webp', '-mobile.webp')} />
+        <img 
+          className="bg" 
+          src={bgImage} 
+          alt={title} 
+          width="1920" 
+          height="600" 
+          fetchpriority="high" 
+        />
+      </picture>
       <div className="overlay"></div>
       <div className="vignette"></div>
       
       <div className="particles">
-        {particles.map((p, i) => (
+        {PARTICLES.map((p, i) => (
           <span 
             key={i} 
             style={{ 

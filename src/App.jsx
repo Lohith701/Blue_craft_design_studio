@@ -16,7 +16,7 @@ const Contact  = lazy(() => import('./pages/Contact'));
 
 // Minimal fullscreen fallback — no layout shift, no spinner flash
 const PageFallback = () => (
-  <div style={{ minHeight: '100vh', background: '#F8F8F8' }} aria-hidden="true" />
+  <div style={{ minHeight: '100svh', background: '#F8F8F8' }} aria-hidden="true" />
 );
 
 function App() {

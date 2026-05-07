@@ -14,11 +14,16 @@ const Contact = () => {
     const formData = new FormData(e.target);
 
     try {
-      await fetch('https://formsubmit.co/ajax/Sales@bluecraftdesignstudio.com', {
+      const response = await fetch('https://formsubmit.co/ajax/Sales@bluecraftdesignstudio.com', {
         method: 'POST',
         body: formData,
         headers: { Accept: 'application/json' },
       });
+
+      if (!response.ok) {
+        throw new Error('Form submission failed');
+      }
+
       alert('Thank you! We will get back to you within 24 hours.');
       e.target.reset();
     } catch {
@@ -37,7 +42,7 @@ const Contact = () => {
         eyebrow="Get In Touch"
         title="Contact Us"
         subtitle="We'd love to hear from you. Let's build something amazing together."
-        bgImage="/images/hero-banner/contact-banner.jpeg"
+        bgImage="/images/hero-banner/contact-banner.webp"
       />
 
       <section className="section bg-secondary">
@@ -109,6 +114,8 @@ const Contact = () => {
                     type="text"
                     name="Name"
                     placeholder="Your Name"
+                    pattern="[A-Za-z\s]+"
+                    title="Only alphabets and spaces are allowed"
                     required
                     aria-label="Your Name"
                   />
@@ -127,7 +134,10 @@ const Contact = () => {
                     <input
                       type="tel"
                       name="Phone"
-                      placeholder="Your Phone"
+                      placeholder="10-digit mobile number"
+                      pattern="[0-9]{10}"
+                      title="Please enter a valid 10-digit number"
+                      required
                       aria-label="Your Phone"
                     />
                   </div>

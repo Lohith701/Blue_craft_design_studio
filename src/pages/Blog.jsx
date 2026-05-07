@@ -76,7 +76,7 @@ const Blog = () => {
         eyebrow="Interior Design Ideas & Inspiration"
         title="Design Trends"
         subtitle="Modular interior design ideas, material guides, and home renovation insights from Bangalore's experts."
-        bgImage="/images/hero-banner/trending-banner.jpeg"
+        bgImage="/images/hero-banner/trending-banner.webp"
       />
 
       <section className="section" style={{ paddingTop: '4rem' }}>

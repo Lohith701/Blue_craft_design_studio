@@ -55,7 +55,7 @@ const About = () => {
         eyebrow="Bangalore's Interior Design Experts"
         title="About Blue Craft"
         subtitle="15 years of crafting luxury, modern, and minimalist interiors that Bangalore homeowners love."
-        bgImage="/images/hero-banner/about-banner.jpeg"
+        bgImage="/images/hero-banner/about-banner.webp"
       />
 
       <section className="section">
@@ -95,8 +95,8 @@ const About = () => {
             </div>
 
             <div className="about-images grid grid-cols-2 gap-4">
-              <img src="/images/about1.jpeg" alt="Blue Craft office and studio space" className="rounded-lg object-cover h-full" loading="lazy" width="500" height="600" />
-              <img src="/images/about2.jpeg" alt="Blue Craft design process in action" className="rounded-lg object-cover h-full mt-8" loading="lazy" width="500" height="600" />
+              <img src="/images/about1.webp" alt="Blue Craft office and studio space" className="rounded-lg object-cover h-full" loading="lazy" width="500" height="600" />
+              <img src="/images/about2.webp" alt="Blue Craft design process in action" className="rounded-lg object-cover h-full mt-8" loading="lazy" width="500" height="600" />
             </div>
           </div>
         </div>

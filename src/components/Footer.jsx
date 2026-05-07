@@ -32,10 +32,32 @@ const LinkedinIcon = () => (
 );
 
 const Footer = () => {
-  const handleNewsletterSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
-    alert('Thank you for subscribing! We will be in touch.');
-    e.target.reset();
+    setIsSubmitting(true);
+    
+    const formData = new FormData(e.target);
+    
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/Sales@bluecraftdesignstudio.com', {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' },
+      });
+
+      if (!response.ok) {
+        throw new Error('Subscription failed');
+      }
+
+      alert('Thank you for subscribing! We will be in touch.');
+      e.target.reset();
+    } catch {
+      alert('There was an error. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -47,8 +69,8 @@ const Footer = () => {
           <div className="footer-col about-col">
             <Link to="/" className="footer-logo">
               <img
-                src="/images/FINAL_LOGO.png"
-                alt="Blue Craft Design Studio Logo"
+                src="/images/FINAL_LOGO.webp"
+                alt="Blue Craft Design Studio - Interior Designers in Bengaluru"
                 className="footer-logo-img"
                 loading="lazy"
                 width="50"
@@ -110,8 +132,12 @@ const Footer = () => {
             <h3>Newsletter</h3>
             <p>Sign up to get the latest design trends and offers.</p>
             <form className="newsletter-form" onSubmit={handleNewsletterSubmit}>
-              <input type="email" name="email" placeholder="Your Email Address" required aria-label="Email address for newsletter" />
-              <button type="submit" className="btn btn-primary">Subscribe</button>
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_subject" value="New Newsletter Subscription" />
+              <input type="email" name="Email" placeholder="Your Email Address" required aria-label="Email address for newsletter" />
+              <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                {isSubmitting ? 'Subscribing…' : 'Subscribe'}
+              </button>
             </form>
           </div>
 

@@ -48,7 +48,7 @@ const Services = () => {
         eyebrow="Home Interior Design Services Bengaluru"
         title="What We Do"
         subtitle="Modular interiors, full home design, and turnkey execution — all under one roof in Bangalore."
-        bgImage="/images/hero-banner/services-banner.jpeg"
+        bgImage="/images/hero-banner/services-banner.webp"
       />
 
       {/* ── Services Grid ── */}
