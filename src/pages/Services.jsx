@@ -112,8 +112,7 @@ const Services = () => {
               </p>
               <Link
                 to="/contact"
-                className="btn btn-primary bg-white text-primary border-white"
-                style={{ color: 'var(--primary)' }}
+                className="btn"
               >
                 Book Your Free Consultation
               </Link>
