@@ -9,10 +9,18 @@ export default defineConfig({
     // Split vendor JS into a separate long-cached chunk
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-react':  ['react', 'react-dom', 'react-router-dom'],
-          'vendor-ui':     ['lucide-react'],
-          'vendor-helmet': ['react-helmet-async'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+              return 'vendor-react';
+            }
+            if (id.includes('lucide-react')) {
+              return 'vendor-ui';
+            }
+            if (id.includes('react-helmet-async')) {
+              return 'vendor-helmet';
+            }
+          }
         },
       },
     },
